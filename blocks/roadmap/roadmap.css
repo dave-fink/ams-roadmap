@@ -1,0 +1,52 @@
+
+.roadmap {
+    height: 60vh;
+    background: var(--light-gray);
+    overflow: auto;
+}
+
+
+ul {
+  list-style: none;
+
+
+    li {
+        margin-left: 30px;
+    }
+
+  .year {
+    background: var(--pink);
+  }
+
+
+  .quarter {
+    background: var(--teal);
+  }
+
+
+  .projects {
+    background: var(--yellow);
+
+    li {
+      padding: 6px 0;
+
+      .tooltip {
+        background: var(--blue);
+        max-height: 0;
+        overflow: hidden;
+        transition: all 1s ease-in-out;
+
+        div {padding: 20px;}
+      }
+
+      &:hover {
+        cursor: pointer;
+        background: var(--blue);
+        .tooltip {
+          display: block;
+          max-height: 999px;
+        }
+      }
+    }
+  }
+}
