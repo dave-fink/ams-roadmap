@@ -1,64 +1,114 @@
-import { div, ul, li } from '../../scripts/dom-helpers.js';
+import { div, ul, li, p, a } from '../../scripts/dom-helpers.js';
+
+
+function animateProjects(action, $quarter) {
+  const $projects = Array.from($quarter.querySelectorAll('.p'));
+    $projects.forEach(($project, i) => {
+      if (action === 'in') {
+        setTimeout(() => {
+          $project.classList.add('show');
+        }, i * 160);
+      } else if (action === 'out') {
+        $project.classList.remove('show');
+      }
+    });
+}
 
 export default function decorate(block) {
-  const raodMapData = block.querySelector('a').href;
+  const roadMapDataUrl = block.querySelector('a').href;
 
   block.innerHTML = '';
-  fetch(raodMapData)
+
+  fetch(roadMapDataUrl)
     .then((response) => response.json())
     .then((data) => {
       const roadmapData = data.data;
 
       // Group data by year and quarter
-      const groupedData = {};
-      roadmapData.forEach(({
-        Year: year,
-        Quarter: quarter,
-        Project: text,
-        Tooltip: tip,
-        Page: path,
-      }) => {
-        if (!groupedData[year]) {
-          groupedData[year] = {};
-        }
-        if (!groupedData[year][quarter]) {
-          groupedData[year][quarter] = [];
-        }
-        groupedData[year][quarter].push({
-          text,
-          tip,
-          path,
-        });
-      });
+      const groupData = roadmapData.reduce((acc, { Year, Quarter, Project, Tooltip, Page }) => {
+        acc[Year] = acc[Year] || {};
+        acc[Year][Quarter] = acc[Year][Quarter] || [];
+        acc[Year][Quarter].push({ text: Project, tip: Tooltip, path: Page });
+        return acc;
+      }, {});
 
-      // Create an <ul> list for each year and quarter
-      const $roadMapUl = ul({ class: 'road-map' });
-      Object.keys(groupedData).forEach((year) => {
-        const $yearLi = li({ class: 'year' }, year);
-        const $quarterUl = ul({ class: 'quarter' });
-        Object.keys(groupedData[year]).forEach((quarter) => {
-          const $quarterLi = li(quarter);
-          const $projectUl = ul({ class: 'projects' });
-          groupedData[year][quarter].forEach((project) => {
-            const $projectLi = li({
-              'data-tip': project.tip,
-              'data-path': project.path,
-            },
-              project.text,
-              div({ class: 'tooltip' }, div(project.tip)),
+      // Create the <ul> list for years
+      const $years = ul({ class: 'years' });
+      Object.entries(groupData).forEach(([year, quarters]) => {
+        const $year = li({ class: 'y' }, year);
+
+        const $quarters = ul({ class: 'quarters' });
+        Object.entries(quarters).forEach(([quarter, projects]) => {
+          const $quarter = li({ class: 'q', id: `Y${year}-${quarter}` }, quarter);
+
+          const $projects = ul({ class: 'projects' });
+          projects.forEach(({ text, tip, path }) => {
+            const $project = li({ class: 'p' },
+              div(
+                text,
+                div({ class: 'tooltip' },
+                  div(
+                    tip,
+                    p(a({ class: 'btn', href: path }, 'Learn more')),
+                  ),
+                ),
+              ),
             );
-            $projectUl.appendChild($projectLi);
+
+            // add click event to make active
+            $project.addEventListener('click', () => {
+              $years.querySelectorAll('.active').forEach(($p) => $p.classList.remove('active'));
+              $project.classList.toggle('active');
+            });
+
+
+            $projects.appendChild($project);
           });
-          $quarterLi.appendChild($projectUl);
-          $quarterUl.appendChild($quarterLi);
+
+          $quarters.appendChild($quarter);
+          $quarter.appendChild($projects);
         });
-        $yearLi.appendChild($quarterUl);
-        $roadMapUl.appendChild($yearLi);
+
+        $years.appendChild($year);
+        $year.appendChild($quarters);
       });
 
-      block.appendChild($roadMapUl);
+      // add intersection observer and if $years.querySelectorAll('.q') is intersecting, showProjects($quarter)
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            animateProjects('in', entry.target);
+          } else {
+            animateProjects('out', entry.target);
+          }
+        });
+      }, {
+        threshold: [0.20]
+      });
+
+
+      // Add click event to quarters and animate in projects
+      $years.querySelectorAll('.q').forEach(($quarter) => {
+        $quarter.addEventListener('click', () => {
+          animateProjects('in', $quarter);
+          });
+        observer.observe($quarter);
+      });
+
+
+
+
+      block.appendChild($years);
     })
     .catch((error) => {
       console.error('Error fetching roadmap data:', error);
     });
+
+
+
+
+
+
+
+
 }

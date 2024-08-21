@@ -1,52 +1,122 @@
+#Y2023-Q2, #Y2023-Q3 {
+  display: none;
+}
+
+.highlight {
+  background: red;
+  border: 1px solid red;
+}
+
 
 .roadmap {
-    height: 60vh;
-    background: var(--light-gray);
-    overflow: auto;
+  height: 80vh;
+  background: var(--light-gray);
+  overflow: auto;
 }
 
 
 ul {
   list-style: none;
+  display: flex;
+  flex-direction: row;
+}
 
 
-    li {
-        margin-left: 30px;
+.years {
+  height: 100%;
+  li.y {
+    font-weight: bold;
+  }
+}
+
+
+ul.quarters {
+  height: 100%;
+  font-weight: normal;
+  background: var(--blue);
+  border-right: 1px solid #fff;
+
+
+  li.q {
+    width: 800px;
+  }
+}
+
+
+ul.projects {
+  flex-direction: column;
+  background: #fff;
+  height: 100%;
+
+  li.p {
+    position: relative;
+    margin: 0 0 0 10px;
+    border-left: 1px solid #000;
+    cursor: pointer;
+
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all .4s ease-in-out;
+
+    > div {
+      padding: 10px; /* apply padding to child when using max-height: 0 */
+      margin: 0;
+    }
+    &:first-child > div { padding-top: 20px }
+
+    &.show {
+      max-height: 999px;
+      opacity: 1;
+      overflow: visible;
     }
 
-  .year {
-    background: var(--pink);
-  }
+    &:before {
+      position: absolute;
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: #000;
+      border-radius: 50%;
+      left: -4px;
+      top: 18px;
+      transition: .5s;
+    }
 
+    &:first-child:before { top: 28px }
 
-  .quarter {
-    background: var(--teal);
-  }
-
-
-  .projects {
-    background: var(--yellow);
-
-    li {
-      padding: 6px 0;
-
-      .tooltip {
-        background: var(--blue);
-        max-height: 0;
-        overflow: hidden;
-        transition: all 1s ease-in-out;
-
-        div {padding: 20px;}
+    &:hover, &.active {
+      /* highlight border - issue with expanding content */
+      /*border-image:*/
+      /*  linear-gradient(*/
+      /*    #000 0%,*/
+      /*    #00d9ff 15%,*/
+      /*    #000 100%*/
+      /*  ) 1 100%;*/
+      &:before {
+        background: #00d9ff;
+        box-shadow:0 0 10px 2px #00e1ff;
       }
+    }
 
-      &:hover {
-        cursor: pointer;
-        background: var(--blue);
-        .tooltip {
-          display: block;
-          max-height: 999px;
-        }
+    .tooltip {
+      max-height: 0;
+      overflow: hidden;
+      transition: all 1s ease-in-out;
+
+      > div {
+        padding: 20px;
+      }
+    }
+
+    &.active {
+      font-weight: bold;
+      .tooltip {
+        font-weight: normal;
+        max-height: 999px;
       }
     }
   }
 }
+
+
