@@ -24,9 +24,11 @@
 	--yellow: #ffce2e;
 	--orange: #e9740a;
 
+  --background: #f5f5f5;
+
 	/* fonts */
-  --body-font-family: "Adobe Clean", adobe-clean, "Trebuchet MS", sans-serif;
-  --heading-font-family: roboto-condensed, roboto-condensed-fallback, sans-serif;
+  --body-font-family: 'Adobe Clean', adobe-clean, 'Trebuchet MS', sans-serif;
+  --heading-font-family: 'Adobe Clean', adobe-clean, 'Trebuchet MS', sans-serif;
 
   /* body sizes */
   --body-font-size-m: 22px;
@@ -79,22 +81,23 @@
 * {
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
 body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
-  background: var(--light-gray);
+  background: var(--background);
 }
+
 
 header {
   position: fixed;
   top: 0;
   width: 100%;
   height: var(--nav-height);
-  background: #fff;
-  border-bottom: 1px solid var(--light-gray);
   box-shadow:0 0 4px 1px rgba(0, 0, 0, 0.1);
+  z-index: 999;
 
   /* sidekick fix */
   helix-sidekick[pushdown] ~ & { top: 49px }
@@ -102,7 +105,7 @@ header {
 
 
 main {
-  margin-top: var(--nav-height);
+  /*margin-top: var(--nav-height);*/
 
   /* main content area */
   > .section > div {
@@ -120,7 +123,7 @@ h1, h2, h3, h4, h5, h6 {
   margin-top: 0.8em;
   margin-bottom: 0.25em;
   font-family: var(--heading-font-family);
-  font-weight: 600;
+  font-weight: 900;
   line-height: 1.25;
   scroll-margin: 40px;
 }

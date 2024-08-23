@@ -1,119 +1,210 @@
-#Y2023-Q2, #Y2023-Q3 {
-  display: none;
-}
+main > .section > div.roadmap-wrapper {
+  --background: #2e2e2e;
+  --lines: #616161;
+  --active: rgb(98, 231, 255);
 
-.highlight {
-  background: red;
-  border: 1px solid red;
-}
+  position: relative;
+  max-width: 100dvw;
+  height: 80dvh; /* match -top in .content */
+  margin: 0;
+  padding: 0;
+  background: var(--background);
+  color: #fff;
 
+  .roadmap {
+    height: inherit;
+    overflow: auto;
+    overflow-y: hidden;
+    user-select: none;
 
-.roadmap {
-  height: 80vh;
-  background: var(--light-gray);
-  overflow: auto;
-}
-
-
-ul {
-  list-style: none;
-  display: flex;
-  flex-direction: row;
-}
-
-
-.years {
-  height: 100%;
-  li.y {
-    font-weight: bold;
-  }
-}
-
-
-ul.quarters {
-  height: 100%;
-  font-weight: normal;
-  background: var(--blue);
-  border-right: 1px solid #fff;
-
-
-  li.q {
-    width: 800px;
-  }
-}
-
-
-ul.projects {
-  flex-direction: column;
-  background: #fff;
-  height: 100%;
-
-  li.p {
-    position: relative;
-    margin: 0 0 0 10px;
-    border-left: 1px solid #000;
-    cursor: pointer;
-
-    max-height: 0;
-    opacity: 0;
-    overflow: hidden;
-    transition: all .4s ease-in-out;
-
-    > div {
-      padding: 10px; /* apply padding to child when using max-height: 0 */
-      margin: 0;
-    }
-    &:first-child > div { padding-top: 20px }
-
-    &.show {
-      max-height: 999px;
-      opacity: 1;
-      overflow: visible;
-    }
-
-    &:before {
+    /* left/right slide bars */
+    .left, .right {
       position: absolute;
-      content: '';
-      width: 8px;
-      height: 8px;
-      background: #000;
-      border-radius: 50%;
-      left: -4px;
-      top: 18px;
-      transition: .5s;
-    }
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: calc((100vw - var(--page-width)) / 2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9;
+      background: linear-gradient(to right, var(--background), transparent);
 
-    &:first-child:before { top: 28px }
+      /* circle buttons */
+      > div {
+        width: 50px;
+        height: 50px;
+        /*border: 1px solid #fff;*/
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: .4;
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0);
+        transition: opacity .5s;
 
-    &:hover, &.active {
-      /* highlight border - issue with expanding content */
-      /*border-image:*/
-      /*  linear-gradient(*/
-      /*    #000 0%,*/
-      /*    #00d9ff 15%,*/
-      /*    #000 100%*/
-      /*  ) 1 100%;*/
-      &:before {
-        background: #00d9ff;
-        box-shadow:0 0 10px 2px #00e1ff;
+
+        .left:hover &, .right:hover & {
+          opacity: .8;
+          box-shadow: 0 0 14px 2px var(--active);
+        }
+
+        &:before {
+          content: '<';
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+        }
       }
     }
-
-    .tooltip {
-      max-height: 0;
-      overflow: hidden;
-      transition: all 1s ease-in-out;
+    .right {
+      left: unset;
+      right: 0;
+      background: linear-gradient(to left, var(--background), transparent);
 
       > div {
-        padding: 20px;
+        left: unset;
+        right: 20%;
+
+        &:before {
+          content: '>'
+        }
       }
     }
 
-    &.active {
-      font-weight: bold;
-      .tooltip {
+    /* all list items */
+    ul {
+      list-style: none;
+      display: flex;
+      flex-direction: row;
+    }
+
+    .years {
+      height: 100%;
+
+      li.y {
+        font-weight: bold;
+      }
+
+      ul.quarters {
+        height: 100%;
         font-weight: normal;
-        max-height: 999px;
+
+
+        li.q {
+          width: 500px;
+          background: var(--blue);
+          border-right: 2px solid #000;
+          height: 40px;
+
+          ul.projects {
+            flex-direction: column;
+            height: 100%;
+
+            li.p {
+              position: relative;
+              margin: 0 0 0 10px;
+              border-left: 1px solid var(--lines);
+              cursor: pointer;
+              opacity: 0;
+              filter: blur(40px);
+              padding-left: 80px;
+              transition: all 340ms ease-out;
+              /* multiply each animation by the li index */
+              /* stylelint-disable-next-line custom-property-no-missing-var-function */
+              transition-delay: calc(var(--index) * 200ms);
+
+              /* fade-in */
+              li.q.on & {
+                padding-left: 0;
+                filter: blur(0);
+                opacity: 1
+              }
+
+              /* project item */
+
+              > div {
+                padding: 10px 100px 10px 14px; /* apply padding to child when using max-height: 0 todo: may not be needed anymore */
+                margin: 0;
+                color: #d1d1d1;
+                transition: all .5s;
+
+
+                li.p:first-child & {
+                  padding-top: 30px
+                }
+
+                /* adjust first */
+              }
+
+
+              /* dots */
+
+              &:before {
+                position: absolute;
+                content: '';
+                width: 10px;
+                height: 10px;
+                background: var(--background);
+                border: 1px solid var(--lines);
+                border-radius: 50%;
+                left: -6.5px;
+                top: 13px;
+                transition: .5s;
+              }
+
+              &:first-child:before {
+                top: 32px
+              }
+
+              /* adjust first */
+
+              &:hover, &.active {
+                > div {
+                  color: #fff;
+                  /* todo: fix hover events */
+                  background: linear-gradient(to right, #616161, transparent);
+                  -webkit-box-shadow: inset -24px 0px 20px 4px #000000;
+                  box-shadow: inset -34px 0px 10px 4px #000000;
+                }
+
+                &:before {
+                  background: var(--active);
+                  box-shadow: 0 0 10px 2px var(--active);
+                }
+              }
+
+              &:hover > div {
+                background: #171717;
+              }
+
+              &.active > div {
+                /*background: #373737;*/
+              }
+
+              .tooltip {
+                max-height: 0;
+                overflow: hidden;
+                transition: all 1s ease-in-out;
+                font-weight: 300 !important;
+
+                > div {
+                  padding: 20px;
+                }
+
+                li.p.active & {
+                  font-weight: normal;
+                  max-height: 999px;
+                }
+              }
+            }
+          }
+        }
       }
     }
   }

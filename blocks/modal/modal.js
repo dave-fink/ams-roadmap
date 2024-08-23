@@ -1,4 +1,4 @@
-import { div, dialog, ul, li, p, a, button, span } from '../../scripts/dom-helpers.js';
+import { div, dialog, button, span } from '../../scripts/dom-helpers.js';
 import { loadFragment } from '../fragment/fragment.js';
 import {
   buildBlock, decorateBlock, loadBlock, loadCSS,

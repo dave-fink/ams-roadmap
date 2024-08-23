@@ -34,3 +34,307 @@
   src: url('../fonts/roboto-regular.woff2') format('woff2');
   unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
+
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanRegular.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanSemiCn.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanSemiCnIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 300;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanLight.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 300;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanLightIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 350;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanSemiLight.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanBold.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanBoldSemiCn.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanBoldIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanBoldSemiCnIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 800;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanExtraBold.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 800;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanExtraBoldIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: normal;*/
+/*  font-weight: 900;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanBlack.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean;*/
+/*  font-style: italic;*/
+/*  font-weight: 900;*/
+/*  src: local('Adobe Clean'), url('../fonts/adobe-clean/AdobeCleanBlackIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: normal;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifRegular.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: normal;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXRegular.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: italic;*/
+/*  font-weight: 400;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: normal;*/
+/*  font-weight: 300;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXLight.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: italic;*/
+/*  font-weight: 300;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXLightIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: normal;*/
+/*  font-weight: 350;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXSemiLight.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: italic;*/
+/*  font-weight: 350;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXSemiLightIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: normal;*/
+/*  font-weight: 500;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifMedium.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: normal;*/
+/*  font-weight: 500;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXMedium.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: italic;*/
+/*  font-weight: 500;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifMediumIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: italic;*/
+/*  font-weight: 500;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXMediumIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: normal;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifBold.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: normal;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXBold.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: italic;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifBoldIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: adobe clean ux;*/
+/*  font-style: italic;*/
+/*  font-weight: 700;*/
+/*  src: local('Adobe Clean UX'), url('../fonts/adobe-clean/AdobeCleanUXBoldIt.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: normal;*/
+/*  font-weight: 900;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifBlack.woff') format('woff')*/
+/*}*/
+
+/*@font-face {*/
+/*  font-family: 'adobe clean serif';*/
+/*  font-style: italic;*/
+/*  font-weight: 900;*/
+/*  src: local('Adobe Clean Serif'), url('../fonts/adobe-clean/AdobeCleanSerifBlackIt.woff') format('woff')*/
+/*}*/
+
+
+@font-face {
+  font-family: 'Adobe Clean';
+  src: url('../fonts/adobe-clean/AdobeClean-BoldIt.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Adobe Clean SemiCondensed';
+  src: url('../fonts/adobe-clean/AdobeClean-BoldSemiCnIt.woff2') format('woff2');
+  font-weight: bold;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Adobe Clean';
+  src: url('../fonts/adobe-clean/AdobeClean-It.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Adobe Clean';
+  src: url('../fonts/adobe-clean/AdobeClean-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Adobe Clean';
+  src: url('../fonts/adobe-clean/AdobeClean-Bold.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Adobe Clean';
+  src: url('../fonts/adobe-clean/AdobeClean-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Adobe Clean SemiCondensed';
+  src: url('../fonts/adobe-clean/AdobeClean-SemiCnIt.woff2') format('woff2');
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Adobe Clean SemiCondensed';
+  src: url('../fonts/adobe-clean/AdobeClean-SemiCn.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Adobe Clean';
+  src: url('../fonts/adobe-clean/AdobeClean-LightIt.woff2') format('woff2');
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Adobe Clean SemiCondensed';
+  src: url('../fonts/adobe-clean/AdobeClean-BoldSemiCn.woff2') format('woff2');
+  font-weight: bold;
+  font-style: normal;
+}
+

@@ -1,4 +1,6 @@
+/* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div, ul, li, p, a } from '../../scripts/dom-helpers.js';
+
 
 
 function animateProjects(action, $quarter) {
@@ -25,10 +27,11 @@ export default function decorate(block) {
       const roadmapData = data.data;
 
       // Group data by year and quarter
-      const groupData = roadmapData.reduce((acc, { Year, Quarter, Project, Tooltip, Page }) => {
+      // added Start to roadmapData
+      const groupData = roadmapData.reduce((acc, { Year, Quarter, Start, Project, Tooltip, Page }) => {
         acc[Year] = acc[Year] || {};
         acc[Year][Quarter] = acc[Year][Quarter] || [];
-        acc[Year][Quarter].push({ text: Project, tip: Tooltip, path: Page });
+        acc[Year][Quarter].push({ Start, text: Project, tip: Tooltip, path: Page });
         return acc;
       }, {});
 
@@ -40,10 +43,16 @@ export default function decorate(block) {
         const $quarters = ul({ class: 'quarters' });
         Object.entries(quarters).forEach(([quarter, projects]) => {
           const $quarter = li({ class: 'q', id: `Y${year}-${quarter}` }, quarter);
+          // if Start equals 'here', add class active to $quarter
+          if (projects.some(({ Start }) => Start === 'here')) {
+            $quarter.classList.add('active');
+            // scroll to active quarter to left of container todo:
+            $quarter.scrollIntoView({ block: 'center' });
+          }
 
           const $projects = ul({ class: 'projects' });
-          projects.forEach(({ text, tip, path }) => {
-            const $project = li({ class: 'p' },
+          projects.forEach(({ text, tip, path }, i) => {
+            const $project = li({ class: 'p', style: `--index:${i}` },
               div(
                 text,
                 div({ class: 'tooltip' },
@@ -61,7 +70,6 @@ export default function decorate(block) {
               $project.classList.toggle('active');
             });
 
-
             $projects.appendChild($project);
           });
 
@@ -77,38 +85,30 @@ export default function decorate(block) {
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            animateProjects('in', entry.target);
+            entry.target.classList.add('on');
           } else {
-            animateProjects('out', entry.target);
+            entry.target.classList.remove('on');
           }
         });
       }, {
-        threshold: [0.20]
+        threshold: [0.20],
       });
-
 
       // Add click event to quarters and animate in projects
       $years.querySelectorAll('.q').forEach(($quarter) => {
-        $quarter.addEventListener('click', () => {
-          animateProjects('in', $quarter);
-          });
+        // $quarter.addEventListener('click', () => {
+        //   $quarter.classList.toggle('on');
+        //   // animateProjects('in', $quarter);
+        // });
         observer.observe($quarter);
       });
 
+      const $left = div({ class: 'left' }, div());
+      const $right = div({ class: 'right' }, div());
 
-
-
-      block.appendChild($years);
+      block.append($years, $left, $right);
     })
     .catch((error) => {
       console.error('Error fetching roadmap data:', error);
     });
-
-
-
-
-
-
-
-
 }
