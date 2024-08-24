@@ -2,7 +2,6 @@
 import { div, span, a, img } from '../../scripts/dom-helpers.js';
 
 function animateHeader($hdr) {
-
   const featured = document.querySelector('.featured');
   if (!featured) return;
 
@@ -35,10 +34,10 @@ function animateHeader($hdr) {
 
   updateStyles(window.scrollY);
 
-  window.addEventListener('scroll', function() {
+  window.addEventListener('scroll', () => {
     lastKnownScrollPosition = window.scrollY;
     if (!ticking) {
-      window.requestAnimationFrame(function() {
+      window.requestAnimationFrame(() => {
         updateStyles(lastKnownScrollPosition);
         ticking = false;
       });
@@ -47,10 +46,8 @@ function animateHeader($hdr) {
   });
 }
 
-
 export default async function decorate(block) {
-
-  const $homeBtn = a({ class: 'home', href: `/` },
+  const $homeBtn = a({ class: 'home', href: '/' },
     img({ src: '/icons/adobe-logo.svg', width: 27, height: 27, alt: 'Adobe' }),
     span('Adobe Managed Services'),
   );
@@ -71,7 +68,6 @@ export default async function decorate(block) {
   );
 
   block.replaceWith($header);
-
 
   animateHeader(document.querySelector('header'));
 }

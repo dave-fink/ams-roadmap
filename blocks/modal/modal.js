@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div, dialog, button, span } from '../../scripts/dom-helpers.js';
 import { loadFragment } from '../fragment/fragment.js';
 import {
@@ -18,7 +19,7 @@ export async function createModal(fragment) {
     fragment.querySelector('.default-content-wrapper'),
   );
 
-  const closeButton = button({ class: 'close-button', 'aria-label': 'Close', type: 'button' }, span({class: 'icon icon-close'}));
+  const closeButton = button({ class: 'close-button', 'aria-label': 'Close', type: 'button' }, span({ class: 'icon icon-close' }));
   closeButton.addEventListener('click', () => $dialog.close());
   $dialog.append(closeButton, dialogContent);
 

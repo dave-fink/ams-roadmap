@@ -1,23 +1,11 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div, ul, li, p, a } from '../../scripts/dom-helpers.js';
-
-
-
-function animateProjects(action, $quarter) {
-  const $projects = Array.from($quarter.querySelectorAll('.p'));
-    $projects.forEach(($project, i) => {
-      if (action === 'in') {
-        setTimeout(() => {
-          $project.classList.add('show');
-        }, i * 160);
-      } else if (action === 'out') {
-        $project.classList.remove('show');
-      }
-    });
-}
+import { scrollToMe, fixYears } from '../../scripts/animations.js';
 
 export default function decorate(block) {
   const roadMapDataUrl = block.querySelector('a').href;
+  let activePos;
+  let posIndex = 0;
 
   block.innerHTML = '';
 
@@ -27,32 +15,50 @@ export default function decorate(block) {
       const roadmapData = data.data;
 
       // Group data by year and quarter
-      // added Start to roadmapData
-      const groupData = roadmapData.reduce((acc, { Year, Quarter, Start, Project, Tooltip, Page }) => {
+      const groupData = roadmapData.reduce((acc, {
+        Year,
+        Quarter,
+        Start,
+        Project,
+        Tooltip,
+        Page,
+      }) => {
         acc[Year] = acc[Year] || {};
         acc[Year][Quarter] = acc[Year][Quarter] || [];
-        acc[Year][Quarter].push({ Start, text: Project, tip: Tooltip, path: Page });
+        acc[Year][Quarter].push({
+          Start,
+          text: Project,
+          tip: Tooltip,
+          path: Page,
+        });
         return acc;
       }, {});
 
+      // todo: style these
+      const $heading = div({ class: 'heading' }, 'Roadmap');
+      const $disclaimer = div({ class: 'disclaimer' }, 'Note: This roadmap is subject to change.');
+
       // Create the <ul> list for years
       const $years = ul({ class: 'years' });
-      Object.entries(groupData).forEach(([year, quarters]) => {
-        const $year = li({ class: 'y' }, year);
+      Object.entries(groupData).forEach(([year, quarters], i) => {
+        const $year = li({ class: `y clr-${i}` }, '\u00A0', div(year));
 
         const $quarters = ul({ class: 'quarters' });
         Object.entries(quarters).forEach(([quarter, projects]) => {
-          const $quarter = li({ class: 'q', id: `Y${year}-${quarter}` }, quarter);
-          // if Start equals 'here', add class active to $quarter
+          posIndex += 1;
+          const pos = posIndex;
+
+          const $quarter = li({ class: 'q', 'data-i': pos }, quarter);
+
+          // handle start quarter
           if (projects.some(({ Start }) => Start === 'here')) {
-            $quarter.classList.add('active');
-            // scroll to active quarter to left of container todo:
-            $quarter.scrollIntoView({ block: 'center' });
+            $quarter.classList.add('start');
+            activePos = pos;
           }
 
           const $projects = ul({ class: 'projects' });
-          projects.forEach(({ text, tip, path }, i) => {
-            const $project = li({ class: 'p', style: `--index:${i}` },
+          projects.forEach(({ text, tip, path }, n) => {
+            const $project = li({ class: 'p', style: `--index:${n}` },
               div(
                 text,
                 div({ class: 'tooltip' },
@@ -64,9 +70,10 @@ export default function decorate(block) {
               ),
             );
 
-            // add click event to make active
+            // add click event to make active & show info
             $project.addEventListener('click', () => {
-              $years.querySelectorAll('.active').forEach(($p) => $p.classList.remove('active'));
+              $years.querySelectorAll('.active')
+                .forEach(($p) => $p.classList.remove('active'));
               $project.classList.toggle('active');
             });
 
@@ -81,9 +88,10 @@ export default function decorate(block) {
         $year.appendChild($quarters);
       });
 
-      // add intersection observer and if $years.querySelectorAll('.q') is intersecting, showProjects($quarter)
-      const observer = new IntersectionObserver((entries) => {
+      // intersection observer to fade in quarters
+      const quarterObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
+          // todo: check elements are fading
           if (entry.isIntersecting) {
             entry.target.classList.add('on');
           } else {
@@ -93,20 +101,45 @@ export default function decorate(block) {
       }, {
         threshold: [0.20],
       });
-
-      // Add click event to quarters and animate in projects
       $years.querySelectorAll('.q').forEach(($quarter) => {
-        // $quarter.addEventListener('click', () => {
-        //   $quarter.classList.toggle('on');
-        //   // animateProjects('in', $quarter);
-        // });
-        observer.observe($quarter);
+        quarterObserver.observe($quarter);
       });
 
+      // todo: check if target is more than scroll distance
+      function scroll(dir) {
+        activePos += dir;
+        const target = block.querySelector(`[data-i="${activePos}"]`);
+        if (target) { scrollToMe(block, target, 500); }
+        // close all active projects
+        $years.querySelectorAll('.active').forEach(($a) => $a.classList.remove('active'));
+      }
       const $left = div({ class: 'left' }, div());
+      $left.addEventListener('click', () => scroll(-1));
       const $right = div({ class: 'right' }, div());
+      $right.addEventListener('click', () => scroll(1));
 
-      block.append($years, $left, $right);
+      block.append(
+        $heading,
+        $years,
+        $left,
+        $right,
+        $disclaimer);
+
+      // scroll to start here item when in view
+      const roadMapObserver = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const startHere = block.querySelector('.start');
+
+            scrollToMe(block, startHere, 2000);
+          }
+        });
+      }, {
+        threshold: [0.20],
+      });
+      roadMapObserver.observe(block);
+
+      fixYears(block, block.querySelectorAll('.y'));
     })
     .catch((error) => {
       console.error('Error fetching roadmap data:', error);

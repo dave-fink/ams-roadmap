@@ -2,9 +2,7 @@ import { div } from '../../scripts/dom-helpers.js';
 import { createOptimizedPicture } from '../../scripts/aem.js';
 import { scrollFadeOut } from '../../scripts/animations.js';
 
-
 export default function decorate(block) {
-
   // check if block has class video
   if (block.classList.contains('video')) {
     const videoPath = block.querySelector('a').href;
@@ -21,12 +19,9 @@ export default function decorate(block) {
 
   block.replaceWith($featured);
 
- // add class loaded after 300ms to $featured
+  // add class loaded after 300ms to $featured
   setTimeout(() => {
     $featured.classList.add('loaded');
     scrollFadeOut($content, -120);
   }, 400);
-
-
-
 }

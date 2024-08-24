@@ -19,6 +19,7 @@ body.modal-open {
     &::backdrop {
       background-color: rgb(19 19 19 / 90%);
       backdrop-filter: blur(4px);
+      transition: all 1s ease-in-out;
     }
 
     .modal-content {

@@ -1,114 +1,102 @@
 main > .section > div.roadmap-wrapper {
-  --background: #2e2e2e;
+  --background: #2b2b2b;
   --lines: #616161;
-  --active: rgb(98, 231, 255);
+
+  --pink: #e439b3;
+  --blue: #3087e6;
+  --teal: #42d5e1;
+  --purple: #9a1f9f;
+
 
   position: relative;
   max-width: 100dvw;
-  height: 80dvh; /* match -top in .content */
+  height: 800px;
   margin: 0;
   padding: 0;
   background: var(--background);
   color: #fff;
 
+
+
+
+
+
   .roadmap {
     height: inherit;
-    overflow: auto;
-    overflow-y: hidden;
     user-select: none;
+    overflow-x: hidden; /* auto for testing */
+    overflow-y: hidden;
 
-    /* left/right slide bars */
-    .left, .right {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: calc((100vw - var(--page-width)) / 2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9;
-      background: linear-gradient(to right, var(--background), transparent);
-
-      /* circle buttons */
-      > div {
-        width: 50px;
-        height: 50px;
-        /*border: 1px solid #fff;*/
-        border-radius: 50%;
-        position: absolute;
-        top: 50%;
-        left: 20%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        opacity: .4;
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0);
-        transition: opacity .5s;
-
-
-        .left:hover &, .right:hover & {
-          opacity: .8;
-          box-shadow: 0 0 14px 2px var(--active);
-        }
-
-        &:before {
-          content: '<';
-          position: absolute;
-          left: 50%;
-          top: 50%;
-          transform: translate(-50%, -50%);
-        }
-      }
-    }
-    .right {
-      left: unset;
-      right: 0;
-      background: linear-gradient(to left, var(--background), transparent);
-
-      > div {
-        left: unset;
-        right: 20%;
-
-        &:before {
-          content: '>'
-        }
-      }
-    }
+  /* todo: add heading fix */
+  .heading {
+    color: #fff;
+    font-size: 30px;
+    font-weight: bold;
+    border: 1px solid red;
+    display: none;
+  }
 
     /* all list items */
     ul {
       list-style: none;
       display: flex;
       flex-direction: row;
+      padding: 0;
+      margin: 0;
     }
 
-    .years {
-      height: 100%;
-
+    ul.years {
+      line-height: 40px; /* adjust for line-height */
+      /*text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);*/
       li.y {
+        font-size: 130%;
         font-weight: bold;
+        height: 40px;
+
+
+        > div {
+          margin-top: -40px; /* adjust for line-height */
+        }
+        /* sticky year */
+        &.fixed > div {
+          margin-top: 0; /* adjust for line-height */
+          position: absolute;
+          top: 0;
+          left: calc((100vw - var(--page-width)) / 2 + 30px);
+          background: var(--background);
+        }
+
       }
 
       ul.quarters {
-        height: 100%;
+        line-height: normal;
+        height: 40px;
+        font-size: 90%;
         font-weight: normal;
 
 
         li.q {
-          width: 500px;
-          background: var(--blue);
-          border-right: 2px solid #000;
-          height: 40px;
+          padding: 10px 0 0 10px;
+          width: 680px;
+          /*background: var(--blue);*/
+          color: var(--background);
+          text-shadow: none;
+          font-weight: bold;
+          border-right: 3px solid #000;
+
+
+          /*&.start {*/
+          /*  background: var(--active);*/
+          /*}*/
 
           ul.projects {
             flex-direction: column;
-            height: 100%;
+            margin-top: 10px;
+            font-size: 80%;
 
             li.p {
               position: relative;
-              margin: 0 0 0 10px;
+              margin: 0 0 0 6px;
               border-left: 1px solid var(--lines);
               cursor: pointer;
               opacity: 0;
@@ -127,30 +115,25 @@ main > .section > div.roadmap-wrapper {
               }
 
               /* project item */
-
               > div {
                 padding: 10px 100px 10px 14px; /* apply padding to child when using max-height: 0 todo: may not be needed anymore */
                 margin: 0;
                 color: #d1d1d1;
                 transition: all .5s;
 
-
-                li.p:first-child & {
-                  padding-top: 30px
-                }
-
-                /* adjust first */
+                /* adjust top */
+                li.p:first-child & { padding-top: 30px }
               }
 
 
               /* dots */
-
               &:before {
                 position: absolute;
                 content: '';
                 width: 10px;
                 height: 10px;
                 background: var(--background);
+                box-shadow: inset -34px 0 10px 4px var(--background);
                 border: 1px solid var(--lines);
                 border-radius: 50%;
                 left: -6.5px;
@@ -158,29 +141,26 @@ main > .section > div.roadmap-wrapper {
                 transition: .5s;
               }
 
-              &:first-child:before {
-                top: 32px
-              }
+              /* adjust top */
+              &:first-child:before { top: 32px }
 
-              /* adjust first */
-
+              /* .p hover */
               &:hover, &.active {
                 > div {
-                  color: #fff;
                   /* todo: fix hover events */
-                  background: linear-gradient(to right, #616161, transparent);
-                  -webkit-box-shadow: inset -24px 0px 20px 4px #000000;
-                  box-shadow: inset -34px 0px 10px 4px #000000;
+                  color: #fff;
+                  background: linear-gradient(to right, #606060, var(--background));
+                  /*box-shadow: inset -34px 0px 10px 4px var(--background);*/
                 }
 
                 &:before {
                   background: var(--active);
                   box-shadow: 0 0 10px 2px var(--active);
+                  border: 1px solid var(--active);
                 }
               }
 
               &:hover > div {
-                background: #171717;
               }
 
               &.active > div {
@@ -207,6 +187,123 @@ main > .section > div.roadmap-wrapper {
         }
       }
     }
+
+    /* left/right slide bars */
+    .left, .right {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: calc((100vw - var(--page-width)) / 2);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9;
+      background: linear-gradient(to right, var(--background), transparent);
+
+      &.disabled {
+        display: none;
+      }
+      /* circle buttons */
+      > div {
+        width: 50px;
+        height: 50px;
+        /*border: 1px solid #fff;*/
+        border-radius: 50%;
+        position: absolute;
+        top: 50%;
+        left: 20%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: .8;
+        background: var(--background);
+        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0);
+        scale: 100%;
+        transition: all 120ms ease-in-out;
+
+        .left:hover &, .right:hover & {
+          scale: 130%;
+          opacity: 1;
+          box-shadow: 0 0 14px 2px #fff;
+        }
+
+        &:before {
+          content: '';
+          height: 14px;
+          width: 14px;
+          border-left: 2px solid #fff;
+          border-bottom: 2px solid #fff;
+          position: absolute;
+          left: 40%;
+          top: 35%;
+          transform: rotate(45deg);
+        }
+      }
+    }
+    .right {
+      left: unset;
+      right: 0;
+      background: linear-gradient(to left, var(--background), transparent);
+
+      > div {
+        left: unset;
+        right: 20%;
+
+        &:before {
+          left: unset;
+          right: 40%;
+          transform: rotate(-135deg);
+        }
+      }
+    }
+
+    .clr-0 {
+      color: var(--pink);
+      li.q { background: var(--pink)}
+      li.p:hover, li.p.active {
+        &:before {
+          background: var(--pink) !important;
+          box-shadow: 0 0 10px 2px var(--pink) !important;
+          border: 1px solid var(--pink) !important;
+        }
+      }
+    }
+    .clr-1 {
+      color: var(--blue);
+      li.q { background: var(--blue)}
+      li.p:hover, li.p.active {
+        &:before {
+          background: var(--blue) !important;
+          box-shadow: 0 0 10px 2px var(--blue) !important;
+          border: 1px solid var(--blue) !important;
+        }
+      }
+    }
+    .clr-2 {
+      color: var(--teal);
+      li.q { background: var(--teal)}
+      li.p:hover, li.p.active {
+        &:before {
+          background: var(--teal) !important;
+          box-shadow: 0 0 10px 2px var(--teal) !important;
+          border: 1px solid var(--teal) !important;
+        }
+      }
+    }
+    .clr-3 {
+      color: var(--yellow);
+      li.q { background: var(--yellow)}
+      li.p:hover, li.p.active {
+        &:before {
+          background: var(--yellow) !important;
+          box-shadow: 0 0 10px 2px var(--yellow) !important;
+          border: 1px solid var(--yellow) !important;
+        }
+      }
+    }
+
   }
 }
 

@@ -25,6 +25,8 @@
 	--orange: #e9740a;
 
   --background: #f5f5f5;
+  --active: rgb(98, 231, 255);
+
 
 	/* fonts */
   --body-font-family: 'Adobe Clean', adobe-clean, 'Trebuchet MS', sans-serif;
@@ -178,12 +180,13 @@ a {
   min-height: 32px;
   height: auto;
   min-width: 72px;
-  padding: 3px 14px 5px;
+  padding: 8px 14px 6px;
   font-size: 14px;
   font-weight: 700;
 
   &:hover {
-    color: var(--blue);
+    /*color: var(--pink);*/
+    box-shadow: 0 0 10px 2px var(--active);
   }
 }
 
