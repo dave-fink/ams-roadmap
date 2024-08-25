@@ -10,6 +10,8 @@ export default function decorate(block) {
     console.log(videoPath);
   }
 
+  // todo: p3 - add paralax to image
+
   const $img = createOptimizedPicture(block.querySelector('img').src, 'alt', true, [{ width: '1400px' }]);
   // const $img = div({ class: 'image' });
   // setBackgroundImage($img, block.querySelector('img').src, [

@@ -1,6 +1,8 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
-import { div, ul, li, p, a } from '../../scripts/dom-helpers.js';
+import { div, ul, li, p, a, span } from '../../scripts/dom-helpers.js';
 import { scrollToMe, fixYears } from '../../scripts/animations.js';
+
+// todo: p6 add history & push state
 
 export default function decorate(block) {
   const roadMapDataUrl = block.querySelector('a').href;
@@ -34,9 +36,14 @@ export default function decorate(block) {
         return acc;
       }, {});
 
-      // todo: style these
-      const $heading = div({ class: 'heading' }, 'Roadmap');
-      const $disclaimer = div({ class: 'disclaimer' }, 'Note: This roadmap is subject to change.');
+      const $heading = div({ class: 'heading' },
+        'Future Vision ',
+        span('(roadmap)'),
+      );
+
+      const $disclaimer = div({ class: 'disclaimer' },
+        ' EA: Early Availability | GA: General Availability',
+      );
 
       // Create the <ul> list for years
       const $years = ul({ class: 'years' });
@@ -105,41 +112,38 @@ export default function decorate(block) {
         quarterObserver.observe($quarter);
       });
 
-      // todo: check if target is more than scroll distance
+      // todo: p5 check if target is more than scroll distance
       function scroll(dir) {
         activePos += dir;
         const target = block.querySelector(`[data-i="${activePos}"]`);
-        if (target) { scrollToMe(block, target, 500); }
+        if (target) { scrollToMe($years, target, 500); }
         // close all active projects
         $years.querySelectorAll('.active').forEach(($a) => $a.classList.remove('active'));
       }
       const $left = div({ class: 'left' }, div());
-      $left.addEventListener('click', () => scroll(-1));
       const $right = div({ class: 'right' }, div());
+      $left.addEventListener('click', () => scroll(-1));
       $right.addEventListener('click', () => scroll(1));
 
-      block.append(
-        $heading,
-        $years,
-        $left,
-        $right,
-        $disclaimer);
+      const $timeline = div({ class: 'timeline' }, $years, $left, $right);
+
+      block.append($heading, $timeline, $disclaimer);
 
       // scroll to start here item when in view
       const roadMapObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const startHere = block.querySelector('.start');
-
-            scrollToMe(block, startHere, 2000);
+            // todo: p7 add active quarter focus animation
+            scrollToMe($years, startHere, 2000);
           }
         });
       }, {
         threshold: [0.20],
       });
-      roadMapObserver.observe(block);
+      roadMapObserver.observe($timeline);
 
-      fixYears(block, block.querySelectorAll('.y'));
+      fixYears($years, $timeline.querySelectorAll('.y'));
     })
     .catch((error) => {
       console.error('Error fetching roadmap data:', error);

@@ -1,6 +1,6 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div, span, a, img } from '../../scripts/dom-helpers.js';
-
+// todo: p8 fade update
 function animateHeader($hdr) {
   const featured = document.querySelector('.featured');
   if (!featured) return;
@@ -52,6 +52,7 @@ export default async function decorate(block) {
     span('Adobe Managed Services'),
   );
 
+  // todo: p7 make search expand
   const $searchBtn = div({ class: 'search' });
   $searchBtn.innerHTML = `
     <svg fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">

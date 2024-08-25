@@ -14,9 +14,9 @@ export function setBackgroundImage(element, src, breakpoints = [
   breakpoints.forEach((br) => {
     const optimizedSrc = `${pathname}?width=${br.width}&format=${ext}&optimize=medium`;
     if (br.media) {
-      sources.push(`@media ${br.media} { .${elementClass} { background-image: url('${optimizedSrc}'); } }`);
+      sources.push(`@media ${br.media} { .${elementClass} { background: url('${optimizedSrc}'); } }`);
     } else {
-      sources.push(`.${elementClass} { background-image: url('${optimizedSrc}'); }`);
+      sources.push(`.${elementClass} { background: url('${optimizedSrc}'); }`);
     }
   });
 

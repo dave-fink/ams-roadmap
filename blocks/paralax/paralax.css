@@ -51,7 +51,7 @@ main > .section > div.featured-wrapper {
         }
 
         h2 {
-          font-size: var(--heading-font-size-xl);
+          font-size: 34px;
           font-weight: 600;
         }
 

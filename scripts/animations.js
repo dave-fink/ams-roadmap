@@ -1,7 +1,7 @@
 export function scrollFadeOut(element, offset = 0) {
   function updateOpacity() {
     const rect = element.getBoundingClientRect();
-    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+   // const windowHeight = window.innerHeight || document.documentElement.clientHeight;
     const startFade = Math.max(rect.top + offset, 0); // Start fading with the offset applied
     const endFade = rect.bottom + offset; // Adjust the bottom by the offset as well
     const fadeRange = endFade - startFade;
@@ -16,7 +16,11 @@ export function scrollFadeOut(element, offset = 0) {
 function getMarginWidth() {
   const vw = window.innerWidth;
   const pageWidth = 1400; // match --page-width in styles.css
-  return (vw - pageWidth) / 2 + 30;
+  // return (vw - pageWidth) / 2 + 30;
+  // todo: p8 fix margin for mobile
+  // console.log(Math.max((vw - pageWidth) / 2 + 30, 30))
+  const margin = Math.max((vw - pageWidth) / 2 + 30, 30);
+  return margin;
 }
 
 export function scrollToMe(container, me, duration) {
@@ -27,6 +31,10 @@ export function scrollToMe(container, me, duration) {
   const startPosition = container.scrollLeft;
   const distance = scrollStartPos - startPosition;
   let startTime = null;
+
+  function easeInOutQuad(t) {
+    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
+  }
 
   function animation(currentTime) {
     if (startTime === null) startTime = currentTime;
@@ -39,9 +47,6 @@ export function scrollToMe(container, me, duration) {
     }
   }
 
-  function easeInOutQuad(t) {
-    return t < 0.5 ? 2 * t * t : -1 + (4 - 2 * t) * t;
-  }
   requestAnimationFrame(animation);
 }
 

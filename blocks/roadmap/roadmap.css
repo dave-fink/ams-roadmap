@@ -1,309 +1,322 @@
+/* stylelint-disable declaration-block-single-line-max-declarations, no-descending-specificity, rule-empty-line-before, color-function-notation */
 main > .section > div.roadmap-wrapper {
   --background: #2b2b2b;
   --lines: #616161;
+  --index: 0;
 
-  --pink: #e439b3;
-  --blue: #3087e6;
-  --teal: #42d5e1;
-  --purple: #9a1f9f;
+  /* blue: # */
+  --blue-rgb: 48, 135, 230;
+  --blue: rgb(var(--blue-rgb));
 
+  /* pink: #e439b3 */
+  --pink-rgb: 228, 57, 179;
+  --pink: rgb(var(--pink-rgb));
+
+  /* teal: #42d5e1 */
+  --teal-rgb: 66, 213, 225;
+  --teal: rgb(var(--teal-rgb));
+
+  /* yellow: #ffce2e */
+  --yellow-rgb: 255, 206, 46;
+  --yellow: rgb(var(--yellow-rgb));
+
+  /* purple: #6349e0 */
+  --purple-rgb: 99, 73, 224;
+  --purple: rgb(var(--purple-rgb));
 
   position: relative;
   max-width: 100dvw;
-  height: 800px;
   margin: 0;
   padding: 0;
   background: var(--background);
   color: #fff;
 
-
-
-
+  /* todo: p3 center align map! */
+  /*display: flex;*/
+  /*flex-direction: column;*/
+  /*align-items: center;*/
 
 
   .roadmap {
-    height: inherit;
-    user-select: none;
-    overflow-x: hidden; /* auto for testing */
-    overflow-y: hidden;
-
-  /* todo: add heading fix */
-  .heading {
-    color: #fff;
-    font-size: 30px;
-    font-weight: bold;
-    border: 1px solid red;
-    display: none;
-  }
-
-    /* all list items */
-    ul {
-      list-style: none;
-      display: flex;
-      flex-direction: row;
-      padding: 0;
-      margin: 0;
+    /*max-width: 2400px;*/
+    .heading {
+      padding: 20px 0;
+      color: #fff;
+      font-size: var(--heading-font-size-xl);
+      font-weight: bold;
+      text-align: center;
+      span { font-weight: 300; opacity: .6 }
     }
 
-    ul.years {
-      line-height: 40px; /* adjust for line-height */
-      /*text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);*/
-      li.y {
-        font-size: 130%;
-        font-weight: bold;
-        height: 40px;
+    .disclaimer {
+      color: #fff;
+      font-size: 12px;
+      font-weight: 300;
+      text-align: center;
+      padding: 0 0 20px;
+    }
 
+    .timeline {
+      position: relative;
+      user-select: none;
 
-        > div {
-          margin-top: -40px; /* adjust for line-height */
-        }
-        /* sticky year */
-        &.fixed > div {
-          margin-top: 0; /* adjust for line-height */
-          position: absolute;
-          top: 0;
-          left: calc((100vw - var(--page-width)) / 2 + 30px);
-          background: var(--background);
-        }
-
+      ul { /* all list items */
+        list-style: none;
+        display: flex;
+        flex-direction: row;
+        padding: 0;
+        margin: 0;
       }
 
-      ul.quarters {
-        line-height: normal;
-        height: 40px;
-        font-size: 90%;
-        font-weight: normal;
+      ul.years { /* scrollable container */
+        height: 800px;
+        overflow: hidden; /* use auto for testing animations */
+        line-height: 40px; /* match '> div' margin-top  */
 
-
-        li.q {
-          padding: 10px 0 0 10px;
-          width: 680px;
-          /*background: var(--blue);*/
-          color: var(--background);
-          text-shadow: none;
+        /* text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); */
+        li.y {
+          font-size: 130%;
           font-weight: bold;
-          border-right: 3px solid #000;
+          height: 40px;
 
 
-          /*&.start {*/
-          /*  background: var(--active);*/
-          /*}*/
+          > div {
+            margin-top: -40px; /* match ul.years line-height */
+          }
 
-          ul.projects {
-            flex-direction: column;
-            margin-top: 10px;
-            font-size: 80%;
+          /* sticky year */
+          &.fixed > div {
+            margin-top: 0; /* adjust for line-height */
+            position: absolute;
+            top: 0;
+            left: calc((100vw - var(--page-width)) / 2 + 30px);
+            background: var(--background);
+          }
 
-            li.p {
-              position: relative;
-              margin: 0 0 0 6px;
-              border-left: 1px solid var(--lines);
-              cursor: pointer;
-              opacity: 0;
-              filter: blur(40px);
-              padding-left: 80px;
-              transition: all 340ms ease-out;
-              /* multiply each animation by the li index */
-              /* stylelint-disable-next-line custom-property-no-missing-var-function */
-              transition-delay: calc(var(--index) * 200ms);
+        }
 
-              /* fade-in */
-              li.q.on & {
-                padding-left: 0;
-                filter: blur(0);
-                opacity: 1
-              }
+        ul.quarters {
+          line-height: normal;
+          height: 40px;
+          font-size: 90%;
+          font-weight: normal;
 
-              /* project item */
-              > div {
-                padding: 10px 100px 10px 14px; /* apply padding to child when using max-height: 0 todo: may not be needed anymore */
-                margin: 0;
-                color: #d1d1d1;
-                transition: all .5s;
+
+          li.q {
+            padding: 10px 0 0 10px;
+            width: 680px;
+
+            /* background: var(--blue); */
+            color: var(--background);
+            text-shadow: none;
+            font-weight: bold;
+            border-right: 3px solid #000;
+
+
+            /* &.start { */
+
+            /*  background: var(--active); */
+
+            /* } */
+
+            ul.projects {
+              flex-direction: column;
+              margin-top: 10px;
+              font-size: 80%;
+
+              li.p {
+                position: relative;
+                margin: 0 0 0 6px;
+                border-left: 1px solid var(--lines);
+                cursor: pointer;
+                opacity: 0;
+                filter: blur(40px);
+                padding-left: 80px;
+                transition: all 340ms ease-out;
+
+                /* todo: p4 tweak project fade in animation */
+
+                /* index is used dynamically - set in object style */
+                transition-delay: calc(var(--index) * 200ms);
+
+                /* fade-in */
+                li.q.on & {
+                  padding-left: 0;
+                  filter: blur(0);
+                  opacity: 1
+                }
+
+                /* project item */
+                > div {
+                  padding: 10px 100px 10px 14px; /* apply padding to child when using max-height: 0 todo: may not be needed anymore */
+                  margin: 0;
+                  color: #d1d1d1;
+                  font-weight: 500;
+                  letter-spacing: .017em; /* match bold font */
+                  transition: color .5s, background .5s;
+
+                  /* adjust top */
+                  li.p:first-child & { padding-top: 30px }
+                  .btn { color: #fff }
+                }
+
+                /* dots */
+                &::before {
+                  position: absolute;
+                  content: '';
+                  width: 10px;
+                  height: 10px;
+                  background: var(--background);
+                  box-shadow: inset -34px 0 10px 4px var(--background);
+                  border: 1px solid var(--lines);
+                  border-radius: 50%;
+                  left: -6.5px;
+                  top: 13px;
+                  scale: 1;
+                  transition: all .5s;
+                }
 
                 /* adjust top */
-                li.p:first-child & { padding-top: 30px }
-              }
+                &:first-child::before { top: 32px }
 
+                /* .p hover */
+                &:hover, &.active {
+                  /* other colors maintained in colors section */
+                  > div { color: #fff; font-weight: 600; letter-spacing: 0; }
 
-              /* dots */
-              &:before {
-                position: absolute;
-                content: '';
-                width: 10px;
-                height: 10px;
-                background: var(--background);
-                box-shadow: inset -34px 0 10px 4px var(--background);
-                border: 1px solid var(--lines);
-                border-radius: 50%;
-                left: -6.5px;
-                top: 13px;
-                transition: .5s;
-              }
-
-              /* adjust top */
-              &:first-child:before { top: 32px }
-
-              /* .p hover */
-              &:hover, &.active {
-                > div {
-                  /* todo: fix hover events */
-                  color: #fff;
-                  background: linear-gradient(to right, #606060, var(--background));
-                  /*box-shadow: inset -34px 0px 10px 4px var(--background);*/
+                  /* dots */
+                  &::before { scale: 1.2 }
                 }
 
-                &:before {
-                  background: var(--active);
-                  box-shadow: 0 0 10px 2px var(--active);
-                  border: 1px solid var(--active);
-                }
-              }
 
-              &:hover > div {
-              }
+                .tooltip {
+                  max-height: 0;
+                  overflow: hidden;
+                  transition: all 1s ease-in-out;
+                  font-weight: 300 !important;
+                  letter-spacing: 0;
 
-              &.active > div {
-                /*background: #373737;*/
-              }
+                  > div {
+                    padding: 20px;
+                  }
 
-              .tooltip {
-                max-height: 0;
-                overflow: hidden;
-                transition: all 1s ease-in-out;
-                font-weight: 300 !important;
-
-                > div {
-                  padding: 20px;
-                }
-
-                li.p.active & {
-                  font-weight: normal;
-                  max-height: 999px;
+                  li.p.active & {
+                    font-weight: normal;
+                    max-height: 999px;
+                  }
                 }
               }
             }
           }
         }
       }
-    }
 
-    /* left/right slide bars */
-    .left, .right {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: calc((100vw - var(--page-width)) / 2);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      z-index: 9;
-      background: linear-gradient(to right, var(--background), transparent);
-
-      &.disabled {
-        display: none;
-      }
-      /* circle buttons */
-      > div {
-        width: 50px;
-        height: 50px;
-        /*border: 1px solid #fff;*/
-        border-radius: 50%;
+      /* left/right slide bars */
+      .left, .right {
         position: absolute;
-        top: 50%;
-        left: 20%;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        width: calc((100vw - var(--page-width)) / 2);
+        cursor: pointer;
         display: flex;
         align-items: center;
         justify-content: center;
-        opacity: .8;
-        background: var(--background);
-        box-shadow: 0 0 10px 2px rgba(0, 0, 0, 0);
-        scale: 100%;
-        transition: all 120ms ease-in-out;
+        z-index: 9;
+        background: linear-gradient(to right, var(--background), transparent);
 
-        .left:hover &, .right:hover & {
-          scale: 130%;
-          opacity: 1;
-          box-shadow: 0 0 14px 2px #fff;
+        /* todo: fix disabled style */
+        &.disabled {
+          display: none;
         }
 
-        &:before {
-          content: '';
-          height: 14px;
-          width: 14px;
-          border-left: 2px solid #fff;
-          border-bottom: 2px solid #fff;
+        /* circle buttons */
+        > div {
+          width: 50px;
+          height: 50px;
+
+          /* border: 1px solid #fff; */
+          border-radius: 50%;
           position: absolute;
-          left: 40%;
-          top: 35%;
-          transform: rotate(45deg);
+          top: 50%;
+          left: 20%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          opacity: .8;
+          background: var(--background);
+          box-shadow: 0 0 10px 2px rgb(0 0 0 / 0%);
+          scale: 100%;
+          transition: all 120ms ease-in-out;
+
+          .left:hover &, .right:hover & {
+            scale: 130%;
+            opacity: 1;
+            box-shadow: 0 0 14px 2px #fff;
+          }
+
+          &::before {
+            content: '';
+            height: 14px;
+            width: 14px;
+            border-left: 2px solid #fff;
+            border-bottom: 2px solid #fff;
+            position: absolute;
+            left: 40%;
+            top: 35%;
+            transform: rotate(45deg);
+          }
         }
       }
-    }
-    .right {
-      left: unset;
-      right: 0;
-      background: linear-gradient(to left, var(--background), transparent);
-
-      > div {
+      .right {
         left: unset;
-        right: 20%;
+        right: 0;
+        background: linear-gradient(to left, var(--background), transparent);
 
-        &:before {
+        > div {
           left: unset;
-          right: 40%;
-          transform: rotate(-135deg);
-        }
-      }
-    }
+          right: 20%;
 
-    .clr-0 {
-      color: var(--pink);
-      li.q { background: var(--pink)}
-      li.p:hover, li.p.active {
-        &:before {
-          background: var(--pink) !important;
-          box-shadow: 0 0 10px 2px var(--pink) !important;
-          border: 1px solid var(--pink) !important;
+          &::before {
+            left: unset;
+            right: 40%;
+            transform: rotate(-135deg);
+          }
         }
       }
-    }
-    .clr-1 {
-      color: var(--blue);
-      li.q { background: var(--blue)}
-      li.p:hover, li.p.active {
-        &:before {
-          background: var(--blue) !important;
-          box-shadow: 0 0 10px 2px var(--blue) !important;
-          border: 1px solid var(--blue) !important;
-        }
-      }
-    }
-    .clr-2 {
-      color: var(--teal);
-      li.q { background: var(--teal)}
-      li.p:hover, li.p.active {
-        &:before {
-          background: var(--teal) !important;
-          box-shadow: 0 0 10px 2px var(--teal) !important;
-          border: 1px solid var(--teal) !important;
-        }
-      }
-    }
-    .clr-3 {
-      color: var(--yellow);
-      li.q { background: var(--yellow)}
-      li.p:hover, li.p.active {
-        &:before {
-          background: var(--yellow) !important;
-          box-shadow: 0 0 10px 2px var(--yellow) !important;
-          border: 1px solid var(--yellow) !important;
-        }
-      }
-    }
 
+
+      /* rename colors to generic '--clr' and map to .clr class */
+      .clr-0 { --clr: var(--pink); --clr-rgb: var(--pink-rgb) }
+      .clr-1 { --clr: var(--blue); --clr-rgb: var(--blue-rgb) }
+      .clr-2 { --clr: var(--teal); --clr-rgb: var(--teal-rgb) }
+      .clr-3 { --clr: var(--purple); --clr-rgb: var(--purple-rgb) }
+      .clr-4 { --clr: var(--yellow); --clr-rgb: var(--yellow-rgb) }
+
+      /* apply colors */
+      .clr-0, .clr-1, .clr-2, .clr-3, .clr-4 {
+        color: var(--clr);
+        li.q { background: var(--clr)}
+        li.p {
+          &:hover, &.active {
+            /* dots */
+            &::before {
+              background: var(--clr) !important;
+              box-shadow: 0 0 10px 2px var(--clr) !important;
+              border: 1px solid var(--clr) !important;
+              filter: brightness(1.1);
+            }
+          }
+          &:hover > div { background: linear-gradient(to right, rgba(var(--clr-rgb), .1), var(--background)); }
+          &.active > div { background: linear-gradient(to right, rgba(var(--clr-rgb), .4), var(--background)); }
+          .btn:hover {
+            background: transparent;
+            box-shadow: 0 0 10px 4px rgba(var(--clr-rgb), .6);
+            filter: brightness(1.1);
+          }
+        }
+      }
+    }
   }
 }
 

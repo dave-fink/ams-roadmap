@@ -23,9 +23,10 @@
 	--green: #009c3b;
 	--yellow: #ffce2e;
 	--orange: #e9740a;
-
   --background: #f5f5f5;
-  --active: rgb(98, 231, 255);
+
+  /* elements */
+  --text: #252525;
 
 
 	/* fonts */
@@ -38,12 +39,10 @@
   --body-font-size-xs: 17px;
 
   /* heading sizes */
-  --heading-font-size-xxl: 55px;
   --heading-font-size-xl: 44px;
   --heading-font-size-l: 34px;
-  --heading-font-size-m: 27px;
+  --heading-font-size-m: 30px;
   --heading-font-size-s: 24px;
-  --heading-font-size-xs: 22px;
 
   /* dimensions */
   --nav-height: 60px;
@@ -90,6 +89,8 @@ body {
   font-family: var(--body-font-family);
   font-size: var(--body-font-size-m);
   background: var(--background);
+  color: var(--text);
+  text-rendering: optimizelegibility;
 }
 
 
@@ -98,7 +99,7 @@ header {
   top: 0;
   width: 100%;
   height: var(--nav-height);
-  box-shadow:0 0 4px 1px rgba(0, 0, 0, 0.1);
+  box-shadow:0 0 4px 1px rgb(0 0 0 / 10%);
   z-index: 999;
 
   /* sidekick fix */
@@ -107,7 +108,7 @@ header {
 
 
 main {
-  /*margin-top: var(--nav-height);*/
+  /* margin-top: var(--nav-height); */
 
   /* main content area */
   > .section > div {
@@ -149,7 +150,6 @@ code, pre {
 pre {
   padding: 16px;
   border-radius: 8px;
-  background-color: var(--light-color);
   overflow-x: auto;
   white-space: pre;
 }
@@ -167,26 +167,38 @@ a {
   word-break: break-word;
 }
 
-/*main img {*/
-/*  max-width: 100%;*/
-/*  width: auto;*/
-/*  height: auto;*/
-/*}*/
+/* main img { */
 
-.btn {
+/*  max-width: 100%; */
+
+/*  width: auto; */
+
+/*  height: auto; */
+
+/* } */
+
+.btn, .button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
   border-width: 1px;
   border-style: solid;
   border-radius: 16px;
-  min-height: 32px;
-  height: auto;
   min-width: 72px;
-  padding: 8px 14px 6px;
+  height: 32px;
+  line-height: 1;
+  padding: 0 14px;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 600;
+  scale: 1;
+  color: var(--text);
+  transition: all ease-in-out 160ms;
 
   &:hover {
-    /*color: var(--pink);*/
-    box-shadow: 0 0 10px 2px var(--active);
+    /* background: rgb(0 0 0 / 20%); */
+    scale: 1.05;
+    box-shadow: 0 0 10px 2px rgb(0 0 0 / 30%);
   }
 }
 
