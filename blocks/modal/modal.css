@@ -1,25 +1,14 @@
-html {
-  overflow-y: scroll;
-}
-
-/* Prevent scrolling when modal is open */
 body.modal-open {
   overflow: hidden;
-  height: 100vh;
+  margin-right: 15px; /* Prevents page from shifting */
 }
-
-body.modal-ready {
-  overflow-y: hidden;
-}
-
-
 
 .modal {
   dialog {
     overscroll-behavior: none;
     overflow: visible;
     position: fixed;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     min-width: 900px;

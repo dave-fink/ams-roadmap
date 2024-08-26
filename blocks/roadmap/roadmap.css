@@ -30,7 +30,7 @@ main > .section > div.roadmap-wrapper {
     width: min(100%, 2000px);
 
     .heading {
-      padding: 20px 0;
+      padding: 30px 0 20px;
       color: #fff;
       font-size: var(--heading-font-size-xl);
       font-weight: bold;
@@ -59,7 +59,7 @@ main > .section > div.roadmap-wrapper {
       }
 
       ul.years { /* scrollable container */
-        min-height: 800px;
+        min-height: 700px;
         overflow: hidden; /* use auto for testing animations */
         line-height: 40px; /* match '> div' margin-top  */
 

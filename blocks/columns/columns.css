@@ -1,5 +1,5 @@
 .columns {
-  margin: 40px 0;
+  margin: 40px 0 60px;
 
   > div { /* row */
     display: flex;
@@ -46,7 +46,7 @@
         width: 64%;
         height: auto;
         box-shadow: 4px 4px 16px rgb(0 0 0 / 60%);
-        border-radius: 20px;
+        border-radius: 0px;
       }
     }
 

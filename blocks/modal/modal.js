@@ -44,7 +44,7 @@ export async function createModal(fragment) {
   $dialog.addEventListener('click', (e) => {
     const { left, right, top, bottom } = $dialog.getBoundingClientRect();
     const { clientX, clientY } = e;
-    if (clientX < left || clientX > right || clientY < top || clientY > bottom) closeDialog()
+    if (clientX < left || clientX > right || clientY < top || clientY > bottom) closeDialog();
   });
 
 
@@ -57,12 +57,7 @@ export async function createModal(fragment) {
       $dialog.showModal();
       // reset scroll position
       setTimeout(() => { dialogContent.scrollTop = 0; }, 0);
-
       document.body.classList.add('modal-open');
-
-
-
-      // document.body.classList.add('modal-open');
     },
   };
 }
