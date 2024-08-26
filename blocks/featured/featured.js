@@ -1,6 +1,6 @@
+/* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div } from '../../scripts/dom-helpers.js';
 import { createOptimizedPicture } from '../../scripts/aem.js';
-import { setBackgroundImage } from '../../scripts/utils.js';
 import { scrollFadeOut } from '../../scripts/animations.js';
 
 export default function decorate(block) {

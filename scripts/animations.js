@@ -1,7 +1,7 @@
 export function scrollFadeOut(element, offset = 0) {
   function updateOpacity() {
     const rect = element.getBoundingClientRect();
-   // const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    // const windowHeight = window.innerHeight || document.documentElement.clientHeight;
     const startFade = Math.max(rect.top + offset, 0); // Start fading with the offset applied
     const endFade = rect.bottom + offset; // Adjust the bottom by the offset as well
     const fadeRange = endFade - startFade;

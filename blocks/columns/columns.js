@@ -17,7 +17,6 @@ export default function decorate(block) {
     // row.classList.add('scale');
 
     [...row.children].forEach((col, i) => {
-
       if (i % 2 === 0) col.classList.add('left');
       else col.classList.add('right');
 

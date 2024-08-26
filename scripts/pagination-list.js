@@ -191,9 +191,9 @@ export default class ArticleList {
       const cat = category.toLowerCase().replace(/\s+/g, '-');
       const $li = li({ class: this.category === cat ? 'active' : '' },
         a({
-            href: this.categoryPath + cat,
-          }, `${category} `,
-          small(`(${categories[category]})`)));
+          href: this.categoryPath + cat,
+        }, `${category} `,
+        small(`(${categories[category]})`)));
       $li.addEventListener('click', (event) => {
         if (this.articleCard && this.articleContainer) event.preventDefault();
         this.category = cat;

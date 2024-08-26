@@ -14,7 +14,6 @@ import {
 // todo: p1 support video block
 // todo: p6 add prev/next buttons
 
-
 export async function createModal(fragment) {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
   const $dialog = dialog();
@@ -46,7 +45,6 @@ export async function createModal(fragment) {
     const { clientX, clientY } = e;
     if (clientX < left || clientX > right || clientY < top || clientY > bottom) closeDialog();
   });
-
 
   block.innerHTML = '';
   block.append($dialog);
