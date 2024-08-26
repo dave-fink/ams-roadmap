@@ -24,7 +24,7 @@ export async function createModal(fragment) {
   );
 
   const closeButton = button({ class: 'close-button', 'aria-label': 'Close', type: 'button' }, span({ class: 'icon icon-close' }));
-  closeButton.addEventListener('click', () => $dialog.close());
+  closeButton.addEventListener('click', () => closeDialog());
   $dialog.append(closeButton, dialogContent);
 
   const block = buildBlock('modal', '');
@@ -32,21 +32,21 @@ export async function createModal(fragment) {
   decorateBlock(block);
   await loadBlock(block);
 
+  function closeDialog() {
+    document.body.classList.add('modal-close');
+    setTimeout(() => {
+      document.body.classList.remove('modal-open', 'modal-close');
+      block.remove();
+    }, 1600);
+  }
+
   // close on click outside the dialog
   $dialog.addEventListener('click', (e) => {
-    const {
-      left, right, top, bottom,
-    } = $dialog.getBoundingClientRect();
+    const { left, right, top, bottom } = $dialog.getBoundingClientRect();
     const { clientX, clientY } = e;
-    if (clientX < left || clientX > right || clientY < top || clientY > bottom) {
-      $dialog.close();
-    }
+    if (clientX < left || clientX > right || clientY < top || clientY > bottom) closeDialog()
   });
 
-  $dialog.addEventListener('close', () => {
-    document.body.classList.remove('modal-open');
-    block.remove();
-  });
 
   block.innerHTML = '';
   block.append($dialog);
@@ -57,7 +57,12 @@ export async function createModal(fragment) {
       $dialog.showModal();
       // reset scroll position
       setTimeout(() => { dialogContent.scrollTop = 0; }, 0);
+
       document.body.classList.add('modal-open');
+
+
+
+      // document.body.classList.add('modal-open');
     },
   };
 }

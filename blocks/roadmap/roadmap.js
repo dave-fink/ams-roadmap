@@ -2,7 +2,7 @@
 import { div, ul, li, p, a, span } from '../../scripts/dom-helpers.js';
 import { scrollToMe, fixYears } from '../../scripts/animations.js';
 
-// todo: p6 add history & push state
+// todo: p8 add history & push state
 
 export default function decorate(block) {
   const roadMapDataUrl = block.querySelector('a').href;
@@ -65,6 +65,8 @@ export default function decorate(block) {
 
           const $projects = ul({ class: 'projects' });
           projects.forEach(({ text, tip, path }, n) => {
+            // ignore empty projects
+            if (text === '') return;
             const $project = li({ class: 'p', style: `--index:${n}` },
               div(
                 text,
@@ -112,7 +114,8 @@ export default function decorate(block) {
         quarterObserver.observe($quarter);
       });
 
-      // todo: p5 check if target is more than scroll distance
+      // todo: p5 disable next buttons check if target is more than scroll distance
+      // todo: p5 fix target after scrolling
       function scroll(dir) {
         activePos += dir;
         const target = block.querySelector(`[data-i="${activePos}"]`);

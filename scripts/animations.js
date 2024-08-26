@@ -51,13 +51,15 @@ export function scrollToMe(container, me, duration) {
 }
 
 export function fixYears(block, years) {
+  // get center position
+  const leftPosition = (window.innerWidth / 2) - 50;
+
   block.addEventListener('scroll', () => {
     const scrollLeftPos = block.scrollLeft;
-    const margin = getMarginWidth();
+
     years.forEach((year) => {
       const yearLeftPos = year.offsetLeft;
-      if (scrollLeftPos >= yearLeftPos - margin) {
-        console.log('fixed');
+      if (scrollLeftPos >= yearLeftPos - leftPosition) {
         year.classList.add('fixed');
       } else {
         year.classList.remove('fixed');

@@ -3,25 +3,15 @@ main > .section > div.roadmap-wrapper {
   --background: #2b2b2b;
   --lines: #616161;
   --index: 0;
-
-  /* blue: # */
-  --blue-rgb: 48, 135, 230;
+  --blue-rgb: 48, 135, 230; /* blue: # */
   --blue: rgb(var(--blue-rgb));
-
-  /* pink: #e439b3 */
-  --pink-rgb: 228, 57, 179;
+  --pink-rgb: 228, 57, 179; /* #e439b3 */
   --pink: rgb(var(--pink-rgb));
-
-  /* teal: #42d5e1 */
-  --teal-rgb: 66, 213, 225;
+  --teal-rgb: 66, 213, 225; /* #42d5e1 */
   --teal: rgb(var(--teal-rgb));
-
-  /* yellow: #ffce2e */
-  --yellow-rgb: 255, 206, 46;
+  --yellow-rgb: 255, 206, 46;  /* #ffce2e */
   --yellow: rgb(var(--yellow-rgb));
-
-  /* purple: #6349e0 */
-  --purple-rgb: 99, 73, 224;
+  --purple-rgb: 99, 73, 224;  /* #6349e0 */
   --purple: rgb(var(--purple-rgb));
 
   position: relative;
@@ -30,15 +20,15 @@ main > .section > div.roadmap-wrapper {
   padding: 0;
   background: var(--background);
   color: #fff;
-
-  /* todo: p3 center align map! */
-  /*display: flex;*/
-  /*flex-direction: column;*/
-  /*align-items: center;*/
+  overflow-x: hidden; /* fix minor overflow issue */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
 
   .roadmap {
-    /*max-width: 2400px;*/
+    width: min(100%, 2000px);
+
     .heading {
       padding: 20px 0;
       color: #fff;
@@ -50,7 +40,7 @@ main > .section > div.roadmap-wrapper {
 
     .disclaimer {
       color: #fff;
-      font-size: 12px;
+      font-size: var(--body-font-size-xs);
       font-weight: 300;
       text-align: center;
       padding: 0 0 20px;
@@ -69,16 +59,15 @@ main > .section > div.roadmap-wrapper {
       }
 
       ul.years { /* scrollable container */
-        height: 800px;
+        min-height: 800px;
         overflow: hidden; /* use auto for testing animations */
         line-height: 40px; /* match '> div' margin-top  */
 
         /* text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); */
         li.y {
-          font-size: 130%;
-          font-weight: bold;
+          font-size: var(--heading-font-size-l);
+          font-weight: 400;
           height: 40px;
-
 
           > div {
             margin-top: -40px; /* match ul.years line-height */
@@ -89,7 +78,7 @@ main > .section > div.roadmap-wrapper {
             margin-top: 0; /* adjust for line-height */
             position: absolute;
             top: 0;
-            left: calc((100vw - var(--page-width)) / 2 + 30px);
+            left: calc(50% - 50px);
             background: var(--background);
           }
 
@@ -98,31 +87,27 @@ main > .section > div.roadmap-wrapper {
         ul.quarters {
           line-height: normal;
           height: 40px;
-          font-size: 90%;
+          font-size: var(--heading-font-size-m);
           font-weight: normal;
+
 
 
           li.q {
             padding: 10px 0 0 10px;
             width: 680px;
-
-            /* background: var(--blue); */
             color: var(--background);
             text-shadow: none;
-            font-weight: bold;
+            font-weight: 600;
             border-right: 3px solid #000;
 
-
-            /* &.start { */
-
-            /*  background: var(--active); */
-
-            /* } */
+            @media (width <= 1400px) {
+              width: 540px;
+            }
 
             ul.projects {
               flex-direction: column;
-              margin-top: 10px;
-              font-size: 80%;
+              margin-top: 4px;
+              font-size: var(--body-font-size-m);
 
               li.p {
                 position: relative;
@@ -148,15 +133,15 @@ main > .section > div.roadmap-wrapper {
 
                 /* project item */
                 > div {
-                  padding: 10px 100px 10px 14px; /* apply padding to child when using max-height: 0 todo: may not be needed anymore */
+                  padding: 10px 100px 10px 14px;
                   margin: 0;
                   color: #d1d1d1;
                   font-weight: 500;
                   letter-spacing: .017em; /* match bold font */
                   transition: color .5s, background .5s;
 
-                  /* adjust top */
-                  li.p:first-child & { padding-top: 30px }
+
+                  li.p:first-child & { padding-top: 30px } /* adjust top */
                   .btn { color: #fff }
                 }
 
@@ -176,8 +161,7 @@ main > .section > div.roadmap-wrapper {
                   transition: all .5s;
                 }
 
-                /* adjust top */
-                &:first-child::before { top: 32px }
+                &:first-child::before { top: 32px } /* adjust top */
 
                 /* .p hover */
                 &:hover, &.active {
@@ -217,7 +201,7 @@ main > .section > div.roadmap-wrapper {
         top: 0;
         bottom: 0;
         left: 0;
-        width: calc((100vw - var(--page-width)) / 2);
+        width: max(80px, calc((100vw - var(--page-width)) / 2));
         cursor: pointer;
         display: flex;
         align-items: center;
@@ -225,7 +209,12 @@ main > .section > div.roadmap-wrapper {
         z-index: 9;
         background: linear-gradient(to right, var(--background), transparent);
 
-        /* todo: fix disabled style */
+        /* if screen is wider than 2000px */
+        @media (width >= 2000px) {
+          width: 15%;
+        }
+
+        /* todo: p7 fix prev/next disabled style */
         &.disabled {
           display: none;
         }
@@ -239,7 +228,6 @@ main > .section > div.roadmap-wrapper {
           border-radius: 50%;
           position: absolute;
           top: 50%;
-          left: 20%;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -249,12 +237,18 @@ main > .section > div.roadmap-wrapper {
           scale: 100%;
           transition: all 120ms ease-in-out;
 
+          .left & { left: 30% }
+          .right & { right: 30% }
+          .left:hover & { left: 24%; }
+          .right:hover & { right: 24%; }
+
           .left:hover &, .right:hover & {
             scale: 130%;
             opacity: 1;
             box-shadow: 0 0 14px 2px #fff;
-          }
+            }
 
+          /* arrow */
           &::before {
             content: '';
             height: 14px;
@@ -262,27 +256,28 @@ main > .section > div.roadmap-wrapper {
             border-left: 2px solid #fff;
             border-bottom: 2px solid #fff;
             position: absolute;
-            left: 40%;
             top: 35%;
+            transition: all 12ms;
+          }
+          .left &::before {
+            left: 42%;
             transform: rotate(45deg);
           }
+          .right &::before {
+            right: 42%;
+            transform: rotate(-135deg);
+          }
+          .left:hover &::before { left: 36%; }
+          .right:hover &::before { right: 36%; }
+
+
+
         }
       }
       .right {
         left: unset;
         right: 0;
         background: linear-gradient(to left, var(--background), transparent);
-
-        > div {
-          left: unset;
-          right: 20%;
-
-          &::before {
-            left: unset;
-            right: 40%;
-            transform: rotate(-135deg);
-          }
-        }
       }
 
 

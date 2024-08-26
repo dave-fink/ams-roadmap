@@ -1,6 +1,18 @@
+html {
+  overflow-y: scroll;
+}
+
+/* Prevent scrolling when modal is open */
 body.modal-open {
   overflow: hidden;
+  height: 100vh;
 }
+
+body.modal-ready {
+  overflow-y: hidden;
+}
+
+
 
 .modal {
   dialog {
@@ -10,16 +22,44 @@ body.modal-open {
     top: 40%;
     left: 50%;
     transform: translate(-50%, -50%);
-
     min-width: 900px;
     max-width: 1400px;
     max-height: calc(100dvh);
-    border: 1px solid #000;
+    opacity: 0;
+    border: 0;
+    box-shadow: 0 4px 20px rgb(0 0 0 / 0%);
+    transition:
+      opacity 1.4s ease-in-out;
+
+    body.modal-open .modal & {
+      opacity: 1;
+      box-shadow: 0 4px 20px rgb(0 0 0 / 90%);
+    }
+
+    body.modal-close .modal & {
+      opacity: 0;
+    }
 
     &::backdrop {
-      background-color: rgb(19 19 19 / 90%);
-      backdrop-filter: blur(4px);
-      transition: all 1s ease-in-out;
+      backdrop-filter: blur(0);
+      opacity: 0;
+      cursor: pointer;
+      transition:
+        backdrop-filter 1.5s ease-in-out,
+        opacity 1s ease-in-out;
+    }
+
+    body.modal-open .modal &::backdrop {
+      opacity: 1;
+      backdrop-filter: blur(8px);
+      background: rgb(0 0 0 / 85%);
+    }
+
+    body.modal-close .modal &::backdrop {
+      opacity: 0;
+      backdrop-filter: blur(0);
+      background: rgb(19 19 19 / 0%);
+
     }
 
     .modal-content {
