@@ -176,7 +176,7 @@ main > .section > div.roadmap-wrapper {
                   font-weight: 300 !important;
                   letter-spacing: 0;
 
-                  > div { padding: 20px; }
+                  > div { padding: 20px 20px 10px }
 
                   li.p.active & {
                     font-weight: normal;
