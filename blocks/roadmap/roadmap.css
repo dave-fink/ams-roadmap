@@ -121,8 +121,8 @@ main > .section > div.roadmap-wrapper {
 
                 /* todo: p4 tweak project fade in animation */
 
-                /* index is used dynamically - set in object style */
-                transition-delay: calc(var(--index) * 200ms);
+                /* var(--index) is set in object style and used to calc delay */
+                transition-delay: calc(var(--index) * 120ms);
 
                 /* fade-in */
                 li.q.on & {
@@ -139,7 +139,6 @@ main > .section > div.roadmap-wrapper {
                   font-weight: 500;
                   letter-spacing: .017em; /* match bold font */
                   transition: color .5s, background .5s;
-
 
                   li.p:first-child & { padding-top: 30px } /* adjust top */
                   .btn { color: #fff }
@@ -172,7 +171,6 @@ main > .section > div.roadmap-wrapper {
                   &::before { scale: 1.2 }
                 }
 
-
                 .tooltip {
                   max-height: 0;
                   overflow: hidden;
@@ -180,9 +178,7 @@ main > .section > div.roadmap-wrapper {
                   font-weight: 300 !important;
                   letter-spacing: 0;
 
-                  > div {
-                    padding: 20px;
-                  }
+                  > div { padding: 20px; }
 
                   li.p.active & {
                     font-weight: normal;
@@ -260,18 +256,13 @@ main > .section > div.roadmap-wrapper {
             transition: all 12ms;
           }
           .left &::before {
-            left: 42%;
+            left: 40%;
             transform: rotate(45deg);
           }
           .right &::before {
-            right: 42%;
+            right: 40%;
             transform: rotate(-135deg);
           }
-          .left:hover &::before { left: 36%; }
-          .right:hover &::before { right: 36%; }
-
-
-
         }
       }
       .right {

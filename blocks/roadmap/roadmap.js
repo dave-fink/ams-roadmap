@@ -29,7 +29,7 @@ export default function decorate(block) {
         acc[Year][Quarter] = acc[Year][Quarter] || [];
         acc[Year][Quarter].push({
           Start,
-          text: Project,
+          title: Project,
           tip: Tooltip,
           path: Page,
         });
@@ -64,12 +64,12 @@ export default function decorate(block) {
           }
 
           const $projects = ul({ class: 'projects' });
-          projects.forEach(({ text, tip, path }, n) => {
+          projects.forEach(({ title, tip, path }, n) => {
             // ignore empty projects
-            if (text === '') return;
+            if (title === '') return;
             const $project = li({ class: 'p', style: `--index:${n}` },
               div(
-                text,
+                title,
                 div({ class: 'tooltip' },
                   div(
                     tip,
@@ -100,7 +100,6 @@ export default function decorate(block) {
       // intersection observer to fade in quarters
       const quarterObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
-          // todo: check elements are fading
           if (entry.isIntersecting) {
             entry.target.classList.add('on');
           } else {
@@ -108,14 +107,14 @@ export default function decorate(block) {
           }
         });
       }, {
-        threshold: [0.20],
+        threshold: [0.40],
       });
       $years.querySelectorAll('.q').forEach(($quarter) => {
         quarterObserver.observe($quarter);
       });
 
       // todo: p5 disable next buttons check if target is more than scroll distance
-      // todo: p5 fix target after scrolling
+      // todo: p5 fix target after scrolling up/down
       function scroll(dir) {
         activePos += dir;
         const target = block.querySelector(`[data-i="${activePos}"]`);
@@ -132,13 +131,15 @@ export default function decorate(block) {
 
       block.append($heading, $timeline, $disclaimer);
 
-      // scroll to start here item when in view
-      const roadMapObserver = new IntersectionObserver((entries) => {
+      // scroll to start for initial scroll
+      const roadMapObserver = new IntersectionObserver((entries, observer) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const startHere = block.querySelector('.start');
             // todo: p7 add active quarter focus animation
             scrollToMe($years, startHere, 2000);
+            // stop observing
+            observer.disconnect();
           }
         });
       }, {
@@ -149,6 +150,7 @@ export default function decorate(block) {
       fixYears($years, $timeline.querySelectorAll('.y'));
     })
     .catch((error) => {
+      // eslint-disable-next-line no-console
       console.error('Error fetching roadmap data:', error);
     });
 }
