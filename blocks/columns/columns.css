@@ -46,7 +46,15 @@
         width: 64%;
         height: auto;
         box-shadow: 4px 4px 16px rgb(0 0 0 / 60%);
-        border-radius: 0px;
+        scale: 1;
+        z-index: 1;
+        transition: all 0.5s;
+        transition-delay: .2s;
+
+        &:hover {
+          scale: 1.4;
+          z-index: 9;
+        }
       }
     }
 
