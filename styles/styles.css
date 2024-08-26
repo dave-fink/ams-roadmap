@@ -118,9 +118,11 @@ main {
     background: #fff;
     box-sizing: border-box;
   }
+
+  .default-content-wrapper {
+    padding-bottom: 60px !important;
+  }
 }
-
-
 
 h1, h2, h3, h4, h5, h6 {
   margin-top: 0.8em;
@@ -154,8 +156,6 @@ pre {
   white-space: pre;
 }
 
-
-
 input, textarea, select, button {
   font: inherit;
 }
@@ -167,14 +167,10 @@ a {
   word-break: break-word;
 }
 
-/* main img { */
-
-/*  max-width: 100%; */
-
-/*  width: auto; */
-
-/*  height: auto; */
-
+/* main img {
+  max-width: 100%;
+  width: auto;
+  height: auto;
 /* } */
 
 .btn, .button {

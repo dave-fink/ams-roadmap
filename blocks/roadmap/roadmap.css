@@ -119,8 +119,6 @@ main > .section > div.roadmap-wrapper {
                 padding-left: 80px;
                 transition: all 340ms ease-out;
 
-                /* todo: p4 tweak project fade in animation */
-
                 /* var(--index) is set in object style and used to calc delay */
                 transition-delay: calc(var(--index) * 120ms);
 
@@ -210,7 +208,7 @@ main > .section > div.roadmap-wrapper {
           width: 15%;
         }
 
-        /* todo: p7 fix prev/next disabled style */
+        /* todo: p3 disabled style */
         &.disabled {
           display: none;
         }

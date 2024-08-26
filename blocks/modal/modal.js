@@ -11,9 +11,9 @@ import {
   Other blocks can also use the createModal() and openModal() functions.
 */
 
-// todo: p2 modal add title and prev next buttons
-// todo: p3 modal add fade in
-// todo: p5 make prev/next buttons work
+// todo: p1 support video block
+// todo: p6 add prev/next buttons
+
 
 export async function createModal(fragment) {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);

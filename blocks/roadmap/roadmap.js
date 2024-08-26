@@ -98,6 +98,38 @@ export default function decorate(block) {
       });
 
       // intersection observer to fade in quarters
+      // todo: p8 fix quarter out of view animation
+      // const quarterObserver = new IntersectionObserver((entries) => {
+      //   const containerRect = $years.getBoundingClientRect();
+      //   entries.forEach((entry, i) => {
+      //     console.log(`Entry ${i}:`, entry.target, entry.isIntersecting);
+      //     const entryRect = entry.boundingClientRect;
+      //
+      //     console.log(`Entry ${i}:`);
+      //     console.log('entryRect.right', entryRect.right);
+      //     console.log('entryRect.left', entryRect.left);
+      //     console.log('containerRect.left', containerRect.left);
+      //     console.log('containerRect.right', containerRect.right);
+      //
+      //     // Check if the entry is out of view on the left
+      //     if (entryRect.right <= containerRect.left) {
+      //       console.log('Element is out on the left');
+      //       entry.target.classList.remove('on');
+      //     }
+      //     // Check if the entry is out of view on the right
+      //     else if (entryRect.left >= containerRect.right) {
+      //       console.log('Element is out on the right');
+      //       entry.target.classList.remove('on');
+      //     } else {
+      //       entry.target.classList.add('on');
+      //     }
+      //   });
+      // }, {
+      //   threshold: [0.40],
+      //   root: $years,
+      //   rootMargin: '0px',
+      // });
+
       const quarterObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -107,14 +139,13 @@ export default function decorate(block) {
           }
         });
       }, {
-        threshold: [0.40],
+        threshold: [0.40], root: $years,
       });
       $years.querySelectorAll('.q').forEach(($quarter) => {
         quarterObserver.observe($quarter);
       });
 
-      // todo: p5 disable next buttons check if target is more than scroll distance
-      // todo: p5 fix target after scrolling up/down
+      // todo: p3 disable next buttons
       function scroll(dir) {
         activePos += dir;
         const target = block.querySelector(`[data-i="${activePos}"]`);

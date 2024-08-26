@@ -17,8 +17,8 @@ function getMarginWidth() {
   const vw = window.innerWidth;
   const pageWidth = 1400; // match --page-width in styles.css
   // return (vw - pageWidth) / 2 + 30;
-  // todo: p8 fix margin for mobile
   // console.log(Math.max((vw - pageWidth) / 2 + 30, 30))
+  // check margins on mobile
   const margin = Math.max((vw - pageWidth) / 2 + 30, 30);
   return margin;
 }

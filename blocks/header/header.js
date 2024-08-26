@@ -52,7 +52,7 @@ export default async function decorate(block) {
     span('Adobe Managed Services'),
   );
 
-  // todo: p7 make search expand
+  // todo: p10 make search expand
   const $searchBtn = div({ class: 'search' });
   $searchBtn.innerHTML = `
     <svg fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">
