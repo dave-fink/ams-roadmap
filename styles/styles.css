@@ -95,7 +95,7 @@ body {
 
 
 header {
-  position: fixed;
+  position: sticky;
   top: 0;
   width: 100%;
   height: var(--nav-height);
@@ -108,8 +108,6 @@ header {
 
 
 main {
-  /* margin-top: var(--nav-height); */
-
   /* main content area */
   > .section > div {
     max-width: var(--page-width);
@@ -121,6 +119,12 @@ main {
 
   .default-content-wrapper {
     padding-bottom: 60px !important;
+
+    picture img {
+      max-width: 90%;
+      height: auto;
+      margin: 0 auto;
+    }
   }
 }
 
@@ -154,6 +158,13 @@ pre {
   border-radius: 8px;
   overflow-x: auto;
   white-space: pre;
+}
+
+sup {
+  font-size: 0.8em;
+  vertical-align: super;
+  opacity: .7;
+  font-weight: 300;
 }
 
 input, textarea, select, button {

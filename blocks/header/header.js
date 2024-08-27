@@ -1,21 +1,21 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div, span, a, img } from '../../scripts/dom-helpers.js';
 // todo: p8 fade update
-function animateHeader($hdr) {
-  const featured = document.querySelector('.featured');
-  if (!featured) return;
 
+function animateHeader($hdr) {
   let lastKnownScrollPosition = 0;
   let ticking = false;
   let bgTransitionPoint = 500;
   let fontTransitionPoint = 250;
 
-  const $featured = document.querySelector('.featured');
+  const $featured = document.querySelector('#parallax');
   if ($featured) {
     const featuredHeight = $featured.clientHeight;
     bgTransitionPoint = featuredHeight;
     fontTransitionPoint = featuredHeight / 2;
   }
+
+  const $scrollableContainer = document.querySelector('#parallax-page-wrapper');
 
   function updateStyles(scrollPosition) {
     const backgroundTransitionFactor = Math.min(scrollPosition / bgTransitionPoint, 1);
@@ -32,10 +32,10 @@ function animateHeader($hdr) {
     $hdr.style.color = fontColor;
   }
 
-  updateStyles(window.scrollY);
+  updateStyles($scrollableContainer.scrollTop);
 
-  window.addEventListener('scroll', () => {
-    lastKnownScrollPosition = window.scrollY;
+  $scrollableContainer.addEventListener('scroll', () => {
+    lastKnownScrollPosition = $scrollableContainer.scrollTop;
     if (!ticking) {
       window.requestAnimationFrame(() => {
         updateStyles(lastKnownScrollPosition);
@@ -45,6 +45,7 @@ function animateHeader($hdr) {
     }
   });
 }
+
 
 export default async function decorate(block) {
   const $homeBtn = a({ class: 'home', href: '/' },
@@ -68,7 +69,21 @@ export default async function decorate(block) {
     $searchBtn,
   );
 
-  block.replaceWith($header);
+  block.remove();
 
-  animateHeader(document.querySelector('header'));
+  // place header in body
+  const $hdr = document.querySelector('header');
+  $hdr.append($header);
+  //document.body.prepend($hdr);
+
+  const $parallax = document.querySelector('#parallax-page-wrapper');
+
+  // if $parralax exists insert header inside it else insert it in body
+  if ($parallax) {
+    $parallax.prepend($hdr);
+  } else {
+    document.body.prepend($hdr);
+  }
+
+  animateHeader($hdr);
 }
