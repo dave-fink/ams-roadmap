@@ -1,8 +1,8 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div } from '../../scripts/dom-helpers.js';
-import { createOptimizedPicture } from '../../scripts/aem.js';
+// import { createOptimizedPicture } from '../../scripts/aem.js';
 import { scrollFadeOut } from '../../scripts/animations.js';
-import { setBackgroundImage} from '../../scripts/utils.js';
+import { setBackgroundImage } from '../../scripts/utils.js';
 
 export default function decorate(block) {
   // format entire page as parallax
@@ -43,12 +43,12 @@ export default function decorate(block) {
   // clean up unused items
   block.remove();
   document.querySelector('main .parallax-wrapper').remove();
-  document.querySelector('main > .section').classList.remove('parallax-container')
+  document.querySelector('main > .section').classList.remove('parallax-container');
   parallaxPageWrapper.prepend($parallax);
 
   // add class loaded after 300ms to $featured
   setTimeout(() => {
     $parallax.classList.add('loaded');
-    // scrollFadeOut($content, -120);
+    scrollFadeOut($content, -120);
   }, 400);
 }

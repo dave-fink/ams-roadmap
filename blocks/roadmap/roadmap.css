@@ -59,13 +59,13 @@ main > .section > div.roadmap-wrapper {
       }
 
       ul.years { /* scrollable container */
-        min-height: 760px;
+        min-height: 780px;
         overflow: hidden; /* use auto for testing animations */
         line-height: 40px; /* match '> div' margin-top  */
 
         /* text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4); */
         li.y {
-          font-size: var(--heading-font-size-l);
+          font-size: var(--heading-font-size-m);
           font-weight: 400;
           height: 40px;
 
@@ -87,14 +87,14 @@ main > .section > div.roadmap-wrapper {
         ul.quarters {
           line-height: normal;
           height: 40px;
-          font-size: var(--heading-font-size-m);
+          font-size: var(--heading-font-size-s);
           font-weight: normal;
 
 
 
           li.q {
             padding: 10px 0 0 10px;
-            width: 680px;
+            width: 700px;
             color: var(--background);
             text-shadow: none;
             font-weight: 600;

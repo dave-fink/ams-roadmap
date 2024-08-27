@@ -1,3 +1,4 @@
+/* stylelint-disable declaration-block-single-line-max-declarations, no-descending-specificity, rule-empty-line-before, color-function-notation, no-duplicate-selectors */
 body {
   overflow-x: hidden;
 }
@@ -14,49 +15,62 @@ body {
   position: absolute;
   width: 100dvw;
   height: 100dvh;
-  top: 80vh; /* match to height of #parallax */
+  top: 60vh; /* match to height of #parallax */
 }
 
 main { background: var(--background) }
 
 /* header, header * { background-color: red !important;  } */
 #parallax {
-  height: 80vh; /* match */
+  height: 60vh; /* match */
   transform-style: preserve-3d;
+
 
   .layer {
     position: absolute;
     inset: 0;
     background-position: bottom center;
     background-size: cover;
-
-    /* background-repeat: repeat-x; */
-
+    height: 100vh;
 
     /*
       translate3d:
       (X-axis [-left/+right], Y-axis [-up/+down], depth [-forward/+backward]
     */
     &.content-0 { /* foreground */
-      transform: translate3d(50%, 420px, -1.7px) scale(1.8);
-      z-index: 9;
+      transform: translate3d(40%, 30%, -1.2px) scale(1.6);
 
       @media (width <= 1800px) {
-        transform: translate3d(40%, 420px, -1.6px) scale(1.8);
+        transform: translate3d(30%, 33%, -1.2px) scale(1.6);
       }
 
+      @media (width >= 2600px) {
+        transform: translate3d(42%, 33%, -1.2px) scale(1.6);
+      }
     }
 
-    &.img-1 {
-      transform: translate3d(0, 180px, -1.5px) scale(1.8);
+    &.img-1 { /* path */
+      transform: translate3d(0, -24%, -1.8px) scale(2);
+
+      @media (width <= 1800px) {
+        transform: translate3d(0, -26%, -1.5px) scale(1.8);
+      }
     }
 
-    &.img-2 { /* na */
-      transform: translate3d(0, 0, 0) scale(1);
+    &.img-2 { /* dots */
+      transform: translate3d(0, -340px, -3px) scale(2);
+
+      @media (width <= 1800px) {
+        transform: translate3d(0, -50%, -3px) scale(2);
+      }
     }
 
     &.img-3 { /* background */
-      transform: translate3d(0, 0, -4px) scale(4);
+      transform: translate3d(0, -80%, -5px) scale(3.8);
+
+      @media (width <= 1800px) {
+        transform: translate3d(0, -80%, -5px) scale(3.8);
+      }
     }
   }
 }
@@ -75,15 +89,12 @@ main { background: var(--background) }
   }
 
   .layer {
-
-
     #parallax.loaded &.content-0 {
       opacity: 1;
       filter: blur(0);
       scale: 100%;
       margin-left: 0;
     }
-
 
     &.content-0 { /* foreground */
       color: #fff;
@@ -98,14 +109,14 @@ main { background: var(--background) }
       }
 
       h2 {
-        font-size: 40px;
+        font-size: var(--heading-font-size-xl);
         font-weight: 600;
         margin: 0;
         text-shadow: 2px 2px 8px rgb(0 0 0 / 90%);
       }
 
       p {
-        font-size: 24px;
+        font-size: var(--body-font-size-l);
         font-weight: 300;
         line-height: 30px;
         margin: 10px 0 0;

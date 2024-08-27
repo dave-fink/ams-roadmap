@@ -9,7 +9,8 @@ export function scrollFadeOut(element, offset = 0) {
     const opacity = Math.max(0, Math.min(1, fadeRange / rect.height));
     element.style.opacity = opacity.toString();
   }
-  window.addEventListener('scroll', updateOpacity);
+  const $scrollableContainer = document.querySelector('#parallax-page-wrapper');
+  $scrollableContainer.addEventListener('scroll', updateOpacity);
   updateOpacity();
 }
 
