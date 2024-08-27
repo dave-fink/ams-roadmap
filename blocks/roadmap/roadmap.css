@@ -59,7 +59,7 @@ main > .section > div.roadmap-wrapper {
       }
 
       ul.years { /* scrollable container */
-        min-height: 700px;
+        min-height: 760px;
         overflow: hidden; /* use auto for testing animations */
         line-height: 40px; /* match '> div' margin-top  */
 

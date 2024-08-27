@@ -38,6 +38,19 @@ async function loadFonts() {
 }
 
 /**
+ * decorates external links to open in new window
+ */
+function decorateAnchors(element) {
+  const A = element.getElementsByTagName('a');
+  const As = Array.from(A).filter((a) => (a.href && !a.href.match(`^http[s]*://${window.location.host}/`)));
+  if (As.length) {
+    As.forEach((a) => {
+      a.target = '_blank';
+    });
+  }
+}
+
+/**
  * Decorates the main element.
  * @param {Element} main The main element
  */
@@ -46,7 +59,7 @@ export function decorateMain(main) {
   // hopefully forward compatible button decoration
   decorateButtons(main);
   decorateIcons(main);
-  // buildAutoBlocks(main);
+  decorateAnchors(main);
   decorateSections(main);
   decorateBlocks(main);
 }

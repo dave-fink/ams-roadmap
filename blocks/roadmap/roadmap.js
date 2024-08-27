@@ -1,5 +1,5 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
-import { div, ul, li, p, a, span } from '../../scripts/dom-helpers.js';
+import { div, ul, li, p, a, span, sup } from '../../scripts/dom-helpers.js';
 import { scrollToMe, fixYears } from '../../scripts/animations.js';
 
 // todo: p8 add history & push state
@@ -67,9 +67,25 @@ export default function decorate(block) {
           projects.forEach(({ title, tip, path }, n) => {
             // ignore empty projects
             if (title === '') return;
+
+            // check if title contains (EA)
+            let newTitle = title;
+            let suffix = '';
+            if (title.includes('(EA)')) {
+              newTitle = title.replace('(EA)', '');
+              suffix = sup({ title: 'Early Access' }, 'EA');
+            }
+
+            if (title.includes('(GA)')) {
+              newTitle = newTitle.replace('(GA)', '');
+              suffix = sup({ title: 'General Access' }, 'GA');
+            }
+
+            newTitle = suffix ? span(newTitle, suffix) : newTitle;
+
             const $project = li({ class: 'p', style: `--index:${n}` },
               div(
-                title,
+                newTitle,
                 div({ class: 'tooltip' },
                   div(
                     tip,
