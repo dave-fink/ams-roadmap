@@ -3,47 +3,27 @@ import { div, span, a, img } from '../../scripts/dom-helpers.js';
 // todo: p8 fade update
 
 function animateHeader($hdr) {
-  let lastKnownScrollPosition = 0;
-  let ticking = false;
-  let bgTransitionPoint = 500;
-  let fontTransitionPoint = 250;
-
-  const $featured = document.querySelector('#parallax');
-  if ($featured) {
-    const featuredHeight = $featured.clientHeight;
-    bgTransitionPoint = featuredHeight;
-    fontTransitionPoint = featuredHeight / 2;
-  }
-
+  const $parallax = document.querySelector('#parallax');
   const $scrollableContainer = document.querySelector('#parallax-page-wrapper');
 
-  function updateStyles(scrollPosition) {
-    const backgroundTransitionFactor = Math.min(scrollPosition / bgTransitionPoint, 1);
-    const fontTransitionFactor = Math.min(scrollPosition / fontTransitionPoint, 1);
-    const bgColor = `rgba(255, 255, 255, ${backgroundTransitionFactor})`;
-    let fontColor;
-    if (scrollPosition === 0) {
-      fontColor = 'white';
-    } else {
-      const fontColorValue = 255 - Math.round(255 * fontTransitionFactor);
-      fontColor = `rgb(${fontColorValue}, ${fontColorValue}, ${fontColorValue})`;
-    }
-    $hdr.style.backgroundColor = bgColor;
-    $hdr.style.color = fontColor;
+  if (!$hdr || !$parallax || !$scrollableContainer) {
+    return;
   }
 
-  updateStyles($scrollableContainer.scrollTop);
-
-  $scrollableContainer.addEventListener('scroll', () => {
-    lastKnownScrollPosition = $scrollableContainer.scrollTop;
-    if (!ticking) {
-      window.requestAnimationFrame(() => {
-        updateStyles(lastKnownScrollPosition);
-        ticking = false;
-      });
-      ticking = true;
+  const hdrHeight = $hdr.offsetHeight;
+  const parallaxHeight = $parallax.offsetHeight;
+  function updateStyles() {
+    const scrollPosition = $scrollableContainer.scrollTop;
+    if (scrollPosition >= parallaxHeight - hdrHeight) {
+      $hdr.classList.add('invert');
+    } else {
+      $hdr.classList.remove('invert');
     }
-  });
+  }
+
+  updateStyles();
+
+  $scrollableContainer.addEventListener('scroll', updateStyles);
 }
 
 export default async function decorate(block) {

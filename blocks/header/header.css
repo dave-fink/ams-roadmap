@@ -1,6 +1,13 @@
 header {
   background: transparent;
   backdrop-filter: blur(4px);
+  color: #fff;
+  transition: all 0.5s;
+
+  &.invert {
+    background: #fff;
+    color: #000;
+  }
 
   div {
     position: relative;

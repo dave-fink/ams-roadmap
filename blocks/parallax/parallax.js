@@ -1,7 +1,7 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div } from '../../scripts/dom-helpers.js';
 // import { createOptimizedPicture } from '../../scripts/aem.js';
-// import { scrollFadeOut } from '../../scripts/animations.js';
+import { scrollFadeOut } from '../../scripts/animations.js';
 import { setBackgroundImage } from '../../scripts/utils.js';
 
 export default function decorate(block) {
@@ -49,6 +49,6 @@ export default function decorate(block) {
   // add class loaded after 300ms to $featured
   setTimeout(() => {
     $parallax.classList.add('loaded');
-    // scrollFadeOut($content, -120);
+    scrollFadeOut($content, -120);
   }, 400);
 }
