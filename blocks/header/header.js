@@ -46,7 +46,6 @@ function animateHeader($hdr) {
   });
 }
 
-
 export default async function decorate(block) {
   const $homeBtn = a({ class: 'home', href: '/' },
     img({ src: '/icons/adobe-logo.svg', width: 27, height: 27, alt: 'Adobe' }),
@@ -74,11 +73,8 @@ export default async function decorate(block) {
   // place header in body
   const $hdr = document.querySelector('header');
   $hdr.append($header);
-  //document.body.prepend($hdr);
 
   const $parallax = document.querySelector('#parallax-page-wrapper');
-
-  // if $parralax exists insert header inside it else insert it in body
   if ($parallax) {
     $parallax.prepend($hdr);
   } else {
