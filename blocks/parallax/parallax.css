@@ -18,13 +18,9 @@ body {
   top: 60vh; /* match to height of #parallax */
 }
 
-main { background: var(--background) }
-
-/* header, header * { background-color: red !important;  } */
 #parallax {
   height: 60vh; /* match */
   transform-style: preserve-3d;
-
 
   .layer {
     position: absolute;
@@ -96,7 +92,7 @@ main { background: var(--background) }
       margin-left: 0;
     }
 
-    &.content-0 { /* foreground */
+    &.content-0 { /* foreground text */
       color: #fff;
       opacity: 0;
       filter: blur(20px);

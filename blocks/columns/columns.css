@@ -32,7 +32,7 @@
       padding: 0 0 20px;
 
       > * {
-        width: 46%;
+        width: 52%;
         margin: 0 auto;
       }
     }
@@ -54,6 +54,7 @@
         &:hover {
           scale: 1.4;
           z-index: 9;
+          box-shadow: 40px 40px 30px rgb(0 0 0 / 40%);
         }
       }
     }
