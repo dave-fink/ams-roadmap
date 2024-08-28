@@ -59,6 +59,14 @@ body.modal-open {
       max-height: calc(90dvh);
       padding: 30px 40px;
 
+      h1 {
+        font-size: 32px;
+      }
+
+      h2 {
+        font-size: 22px;
+      }
+
       picture{
         img {
           width: 100%;
