@@ -34,7 +34,7 @@ async function createForm(formHref, submitHref) {
   const $msg = div({ class: 'msg' },
     h2('Do you have a question?',
       br(),
-      'Maybe an Idea!'),
+      'Maybe an idea!'),
     h3('Drop us a message. We love feedback!'),
   );
   form.append($msg);
