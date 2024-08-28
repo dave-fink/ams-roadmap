@@ -250,12 +250,14 @@ ol li::before {
 
 
 button.cse-notes {
+  display: none;
   opacity: .05;
   border: none;
   padding: 4px 20px;
   position: absolute;
   left: 0;
   cursor: pointer;
+
   &:hover {
     opacity: 1;
   }
