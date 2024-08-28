@@ -57,13 +57,17 @@ body.modal-open {
       overscroll-behavior: none;
       width: 100%;
       max-height: calc(90dvh);
-      padding: 24px;
+      padding: 30px 40px;
 
       picture{
         img {
           width: 100%;
           height: auto;
         }
+      }
+
+      .button-container {
+        text-align: center;
       }
 
     }

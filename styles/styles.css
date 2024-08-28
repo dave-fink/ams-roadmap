@@ -119,6 +119,9 @@ main {
 
   .default-content-wrapper {
     padding-bottom: 60px !important;
+    font-weight: 300;
+    line-height: 1.4em;
+
 
     picture img {
       max-width: 90%;
@@ -184,6 +187,28 @@ a {
   height: auto;
 /* } */
 
+ol {
+  padding: 0;
+  margin: 20px 0 0 20px;
+  list-style: none;
+  list-style-position: inside; /* Controls the position of the list marker */
+  counter-reset: list-item; /* Resets list item counter */
+}
+
+/* Styling for list items */
+ol li {
+  padding: 20px 0 10px; /* Add space around each item */
+  border-bottom: 1px solid #ddd; /* Add a subtle border between items */
+}
+
+/* Style for the numbers */
+ol li::before {
+  content: counter(list-item) ". "; /* Display numbers followed by a period */
+  font-weight: bold; /* Make numbers bold */
+  color: #007BFF; /* Use a color for the numbers (e.g., blue) */
+  margin-left: -20px; /* Space between the number and the text */
+}
+
 .btn, .button {
   display: inline-flex;
   align-items: center;
@@ -220,6 +245,19 @@ a {
     display: block;
     height: 100%;
     width: 100%;
+  }
+}
+
+
+button.cse-notes {
+  opacity: .05;
+  border: none;
+  padding: 4px 20px;
+  position: absolute;
+  left: 0;
+  cursor: pointer;
+  &:hover {
+    opacity: 1;
   }
 }
 

@@ -24,7 +24,3 @@ export function setBackgroundImage(element, src, breakpoints = [
   style.textContent = sources.join(' ');
   document.head.appendChild(style);
 }
-
-export function bogus() {
-  // ingore elsint error
-}
