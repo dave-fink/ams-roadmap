@@ -67,6 +67,11 @@ body.modal-open {
         font-size: 22px;
       }
 
+      h4 {
+        font-size: var(--body-font-size);
+        margin: 40px 0 -20px;
+      }
+
       picture{
         img {
           width: 100%;
@@ -74,8 +79,18 @@ body.modal-open {
         }
       }
 
+      li img {
+        display: inline;
+        width: auto;
+      }
+
       .button-container {
         text-align: center;
+        margin: 20px 0 30px;
+
+        a {
+          color: var(--text);
+        }
       }
 
     }

@@ -131,7 +131,6 @@
     width: 70%;
     margin: 0 auto;
 
-
     input, textarea {
       border: 1px solid #bababa !important;
       margin: 1px 101px 1px 1px;
@@ -141,7 +140,6 @@
         border: 2px solid var(--blue) !important;
       }
     }
-
   }
 
   > div {
@@ -157,10 +155,4 @@
       margin: 10px 0 30px;
     }
   }
-
-
-}
-
-.form-wrapper form {
-
 }
