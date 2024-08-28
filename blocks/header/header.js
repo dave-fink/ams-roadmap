@@ -1,6 +1,5 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
 import { div, span, a, img } from '../../scripts/dom-helpers.js';
-// todo: p8 fade update
 
 function animateHeader($hdr) {
   const $parallax = document.querySelector('#parallax');
@@ -32,7 +31,7 @@ export default async function decorate(block) {
     span('Adobe Managed Services'),
   );
 
-  // todo: p10 make search expand
+  // todo: p10 make search expandable
   const $searchBtn = div({ class: 'search' });
   $searchBtn.innerHTML = `
     <svg fill="currentColor" width="24" height="24" xmlns="http://www.w3.org/2000/svg">

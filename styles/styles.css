@@ -98,7 +98,6 @@ header {
   top: 0;
   width: 100%;
   height: var(--nav-height);
-  box-shadow:0 0 4px 1px rgb(0 0 0 / 10%);
   z-index: 999;
 
   /* sidekick fix */
@@ -107,13 +106,15 @@ header {
 
 
 main {
-  /* main content area */
+  background: var(--background);
+
   > .section > div {
     max-width: var(--page-width);
     margin: auto;
     padding: 10px 40px;
     background: #fff;
     box-sizing: border-box;
+    box-shadow: 0 0 100px rgb(0 0 0 / 30%);  /* Right shadow */
   }
 
   .default-content-wrapper {

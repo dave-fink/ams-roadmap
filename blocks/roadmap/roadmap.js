@@ -51,6 +51,7 @@ export default function decorate(block) {
         const $year = li({ class: `y clr-${i}` }, '\u00A0', div(year));
 
         const $quarters = ul({ class: 'quarters' });
+
         Object.entries(quarters).forEach(([quarter, projects]) => {
           posIndex += 1;
           const pos = posIndex;
@@ -113,39 +114,6 @@ export default function decorate(block) {
         $year.appendChild($quarters);
       });
 
-      // intersection observer to fade in quarters
-      // todo: p8 fix quarter out of view animation
-      // const quarterObserver = new IntersectionObserver((entries) => {
-      //   const containerRect = $years.getBoundingClientRect();
-      //   entries.forEach((entry, i) => {
-      //     console.log(`Entry ${i}:`, entry.target, entry.isIntersecting);
-      //     const entryRect = entry.boundingClientRect;
-      //
-      //     console.log(`Entry ${i}:`);
-      //     console.log('entryRect.right', entryRect.right);
-      //     console.log('entryRect.left', entryRect.left);
-      //     console.log('containerRect.left', containerRect.left);
-      //     console.log('containerRect.right', containerRect.right);
-      //
-      //     // Check if the entry is out of view on the left
-      //     if (entryRect.right <= containerRect.left) {
-      //       console.log('Element is out on the left');
-      //       entry.target.classList.remove('on');
-      //     }
-      //     // Check if the entry is out of view on the right
-      //     else if (entryRect.left >= containerRect.right) {
-      //       console.log('Element is out on the right');
-      //       entry.target.classList.remove('on');
-      //     } else {
-      //       entry.target.classList.add('on');
-      //     }
-      //   });
-      // }, {
-      //   threshold: [0.40],
-      //   root: $years,
-      //   rootMargin: '0px',
-      // });
-
       const quarterObserver = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
@@ -161,11 +129,21 @@ export default function decorate(block) {
         quarterObserver.observe($quarter);
       });
 
-      // todo: p3 disable next buttons
       function scroll(dir) {
         activePos += dir;
         const target = block.querySelector(`[data-i="${activePos}"]`);
         if (target) { scrollToMe($years, target, 500); }
+        // if activePos is at the start or end, disable the buttons
+        if (activePos === 1) {
+          $left.classList.add('disabled');
+        } else {
+          $left.classList.remove('disabled');
+        }
+        if (activePos === posIndex) {
+          $right.classList.add('disabled');
+        } else {
+          $right.classList.remove('disabled');
+        }
         // close all active projects
         $years.querySelectorAll('.active').forEach(($a) => $a.classList.remove('active'));
       }
