@@ -49,11 +49,13 @@
         scale: 1;
         z-index: 1;
         transition: all 0.5s;
-        transition-delay: .2s;
+        transition-delay: 300ms;
+        filter: grayscale(20%);
 
         &:hover {
           scale: 1.4;
           z-index: 9;
+          filter: grayscale(0%);
           box-shadow: 40px 40px 30px rgb(0 0 0 / 40%);
         }
       }

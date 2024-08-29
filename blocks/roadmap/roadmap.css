@@ -110,13 +110,12 @@ main > .section > div.roadmap-wrapper {
 
             ul.projects {
               flex-direction: column;
-              margin-top: 4px;
+              margin-top: 6px;
               font-size: var(--body-font-size-m);
 
               li.p {
                 position: relative;
                 margin: 0 0 0 6px;
-                border-left: 1px solid var(--lines);
                 cursor: pointer;
                 opacity: 0;
                 filter: blur(40px);
@@ -154,20 +153,23 @@ main > .section > div.roadmap-wrapper {
                   height: 10px;
                   background: var(--background);
                   box-shadow: inset -34px 0 10px 4px var(--background);
-                  border: 1px solid var(--lines);
                   border-radius: 50%;
                   left: -6.5px;
-                  top: 13px;
+                  top: 15.5px;
                   scale: 1;
                   transition: all .5s;
                 }
 
-                &:first-child::before { top: 32px } /* adjust top */
+                &:first-child::before { top: 34px } /* adjust top */
 
                 /* .p hover */
                 &:hover, &.active {
                   /* other colors maintained in colors section */
-                  > div { color: #fff; font-weight: 600; letter-spacing: 0; }
+                  > div {
+                    color: #fff;
+                    font-weight: 600;
+                    letter-spacing: 0;
+                  }
 
                   /* dots */
                   &::before { scale: 1.2 }
@@ -286,6 +288,8 @@ main > .section > div.roadmap-wrapper {
         color: var(--clr);
         li.q { background: var(--clr)}
         li.p {
+          border-left: 1px solid var(--clr);
+          &::before { border: 1px solid var(--clr) }
           &:hover, &.active {
             /* dots */
             &::before {
