@@ -3,7 +3,7 @@ indices:
   projects:
     include:
       - '/projects/*'
-    target: /roadmap-index.json
+    target: /projects/project-index.json
     properties:
       project:
         select: head > meta[name="project-title"]
