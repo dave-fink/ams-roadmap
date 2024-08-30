@@ -17,11 +17,6 @@ function getCurrentDateTime() {
 async function createForm(formHref, submitHref) {
   const resp = await fetch(formHref);
   const json = await resp.json();
-  const locale = 'en';
-  // get translations
-  // await (async () => {
-  //   await loadTranslations(`${formHref}?sheet=translations`, locale || 'en');
-  // })();
 
   const translatedData = json.data.map((fd) => {
     // fd.Label = translate(fd.Label);
