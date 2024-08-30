@@ -17,7 +17,11 @@ function autolinkModals(element) {
   element.addEventListener('click', async (e) => {
     const origin = e.target.closest('a');
 
-    if (origin && origin.href && origin.href.includes('/modals/')) {
+    if (
+      origin
+      && origin.href
+      && (origin.href.includes('/modals/') || origin.href.includes('/projects/'))
+    ) {
       e.preventDefault();
       const { openModal } = await import(`${window.hlx.codeBasePath}/blocks/modal/modal.js`);
       openModal(origin.href);
@@ -104,8 +108,17 @@ async function loadLazy(doc) {
   const element = hash ? doc.getElementById(hash.substring(1)) : false;
   if (hash && element) element.scrollIntoView();
 
-  loadHeader(doc.querySelector('header'));
-  loadFooter(doc.querySelector('footer'));
+  const $header = doc.querySelector('header');
+  const $footer = doc.querySelector('footer');
+
+  if (window.self !== window.top) {
+    // if in iframe remove header and footer
+    $header.remove();
+    $footer.remove();
+  } else {
+    await loadHeader($header);
+    await loadFooter($footer);
+  }
 
   loadCSS(`${window.hlx.codeBasePath}/styles/lazy-styles.css`);
   loadFonts();
