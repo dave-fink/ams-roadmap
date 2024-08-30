@@ -288,8 +288,8 @@ main > .section > div.roadmap-wrapper {
         color: var(--clr);
         li.q { background: var(--clr)}
         li.p {
-          border-left: 1px solid var(--clr);
-          &::before { border: 1px solid var(--clr) }
+          border-left: 1px solid rgba(var(--clr-rgb), .5);
+          &::before { border: 1px solid rgba(var(--clr-rgb), .5) }
           &:hover, &.active {
             /* dots */
             &::before {

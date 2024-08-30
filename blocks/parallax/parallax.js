@@ -45,10 +45,11 @@ export default function decorate(block) {
   document.querySelector('main .parallax-wrapper').remove();
   document.querySelector('main > .section').classList.remove('parallax-container');
   parallaxPageWrapper.prepend($parallax);
+  $parallax.classList.add('loaded');
 
   // add class loaded after 300ms to $featured
   setTimeout(() => {
-    $parallax.classList.add('loaded');
+    $parallax.classList.add('fade-in');
     scrollFadeOut($content, -120);
   }, 400);
 }
