@@ -1,7 +1,6 @@
 import { getMetadata } from '../../scripts/aem.js';
 import { loadFragment } from '../fragment/fragment.js';
 import { div } from '../../scripts/dom-helpers.js';
-import { speakerNotes } from '../speaker-notes/speaker-notes.js';
 
 /**
  * loads and decorates the footer
@@ -19,7 +18,6 @@ export default async function decorate(block) {
   while (fragment.firstElementChild) footer.append(fragment.firstElementChild);
 
   block.append(footer);
-  speakerNotes(block);
 
   const $hackathonModal = div(
     { class: 'hackathon-modal' },

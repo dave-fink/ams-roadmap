@@ -1,98 +1,55 @@
 body.modal-open {
   overflow: hidden;
-  margin-right: 15px; /* Prevents page from shifting */
+  margin-right: 15px;
 }
 
-.modal {
-  dialog {
-    overscroll-behavior: none;
-    overflow: visible;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    min-width: 900px;
-    max-width: 1400px;
-    max-height: calc(100dvh);
+dialog {
+  overscroll-behavior: none;
+  overflow: visible;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 900px;
+  width: 60%;
+  max-width: 1400px;
+  border: 0;
+  opacity: 0;
+  box-shadow: 0 4px 20px rgb(0 0 0 / 0%);
+  transition: all 800ms ease-in-out 100ms;
+
+  &.appear {
+    opacity: 1;
+    box-shadow: 0 4px 30px rgb(0 0 0 / 90%);
+  }
+
+  &::backdrop {
+    backdrop-filter: blur(0);
     opacity: 0;
-    border: 0;
-    box-shadow: 0 4px 20px rgb(0 0 0 / 0%);
-    transition:
-      opacity 1.4s ease-in-out;
+    background: rgb(0 0 0 / 0%);
+    cursor: pointer;
+    transition: all 600ms ease-in;
+  }
 
-    body.modal-open .modal & {
-      opacity: 1;
-      box-shadow: 0 4px 20px rgb(0 0 0 / 90%);
-    }
+  body.modal-open &::backdrop {
+    opacity: 1;
+    backdrop-filter: blur(6px);
+    background: rgb(0 0 0 / 85%);
+  }
 
-    body.modal-close .modal & {
-      opacity: 0;
-    }
+  body.modal-open.modal-close &::backdrop {
+    backdrop-filter: blur(0);
+    opacity: 0;
+    background: rgb(0 0 0 / 0%);
+  }
 
-    &::backdrop {
-      backdrop-filter: blur(0);
-      opacity: 0;
-      cursor: pointer;
-      transition:
-        backdrop-filter 1.5s ease-in-out,
-        opacity 1s ease-in-out;
-    }
+  .content {
+    width: 100%;
 
-    body.modal-open .modal &::backdrop {
-      opacity: 1;
-      backdrop-filter: blur(8px);
-      background: rgb(0 0 0 / 85%);
-    }
-
-    body.modal-close .modal &::backdrop {
-      opacity: 0;
-      backdrop-filter: blur(0);
-      background: rgb(19 19 19 / 0%);
-
-    }
-
-    .modal-content {
-      box-sizing: border-box;
-      overflow-y: auto;
-      overscroll-behavior: none;
+    iframe {
       width: 100%;
-      max-height: calc(90dvh);
-      padding: 30px 40px;
-
-      h1 {
-        font-size: 32px;
-      }
-
-      h2 {
-        font-size: 22px;
-      }
-
-      h4 {
-        font-size: var(--body-font-size);
-        margin: 40px 0 -20px;
-      }
-
-      picture{
-        img {
-          width: 100%;
-          height: auto;
-        }
-      }
-
-      li img {
-        display: inline;
-        width: auto;
-      }
-
-      .button-container {
-        text-align: center;
-        margin: 20px 0 30px;
-
-        a {
-          color: var(--text);
-        }
-      }
-
+      max-height: 90vh;
+      border: none;
     }
   }
 
@@ -130,8 +87,10 @@ body.modal-open {
       }
 
       &::after {
-        transform: translate(-50%, -50%) rotate(-45deg);
+        transform: translate(-50%, -50%) rotate(-45deg)
       }
     }
   }
 }
+
+

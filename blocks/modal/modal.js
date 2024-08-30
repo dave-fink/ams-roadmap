@@ -1,43 +1,74 @@
 /* eslint-disable no-use-before-define, object-curly-newline, function-paren-newline */
-import { div, dialog, button, span } from '../../scripts/dom-helpers.js';
-import { loadFragment } from '../fragment/fragment.js';
-import {
-  buildBlock, decorateBlock, loadBlock, loadCSS,
-} from '../../scripts/aem.js';
+import { div, dialog, button, span, iframe } from '../../scripts/dom-helpers.js';
+import { loadCSS } from '../../scripts/aem.js';
 
 /*
   This is not a traditional block, so there is no decorate function.
-  Instead, links to a /modals/ path are automatically transformed into a modal.
-  Other blocks can also use the createModal() and openModal() functions.
+  Instead, links to a /modals/ & /projects/ paths are automatically transformed into a modal.
 */
 
-// todo: p1 support video block
-// todo: p6 add prev/next buttons
+function showIframe(iFrame) {
+  function setIframeHeight() {
+    const iframeDoc = iFrame.contentDocument || iFrame.contentWindow?.document;
 
-export async function createModal(fragment) {
+    if (iframeDoc) {
+      const contentHeight = iframeDoc.body.scrollHeight;
+      iFrame.style.height = `${contentHeight}px`;
+      iFrame.parentElement.parentElement.classList.add('appear');
+    } else {
+      console.warn('Iframe document is not accessible.');
+    }
+  }
+
+  iFrame.onload = function () {
+    setIframeHeight();
+
+    const iframeDoc = iFrame.contentDocument || iFrame.contentWindow?.document;
+    if (iframeDoc) {
+      const observer = new MutationObserver(setIframeHeight);
+      observer.observe(iframeDoc.body, { childList: true, subtree: true });
+    }
+
+    window.addEventListener('resize', setIframeHeight);
+  };
+
+  iFrame.onerror = function () {
+    console.error('Error loading iframe content.');
+  };
+}
+
+export async function createModal(path) {
   await loadCSS(`${window.hlx.codeBasePath}/blocks/modal/modal.css`);
   const $dialog = dialog();
 
-  const dialogContent = div({ class: 'modal-content' },
-    fragment.querySelector('.default-content-wrapper'),
-  );
+  const $content = div({ class: 'content' });
+  const iFrame = iframe({ src: path });
+  $content.append(iFrame);
 
-  const closeButton = button({ class: 'close-button', 'aria-label': 'Close', type: 'button' }, span({ class: 'icon icon-close' }));
-  closeButton.addEventListener('click', () => closeDialog());
-  $dialog.append(closeButton, dialogContent);
+  const $closeBtn = button({ class: 'close-button' }, span({ class: 'icon icon-close' }));
 
-  const block = buildBlock('modal', '');
-  document.querySelector('main').append(block);
-  decorateBlock(block);
-  await loadBlock(block);
+  $dialog.append($closeBtn, $content);
+  document.body.append($dialog);
+
+  showIframe(iFrame);
 
   function closeDialog() {
     document.body.classList.add('modal-close');
+
     setTimeout(() => {
-      document.body.classList.remove('modal-open', 'modal-close');
-      block.remove();
-    }, 1600);
+      $dialog.classList.remove('appear');
+    }, 200);
+
+    // wait for animations to complete
+    setTimeout(() => {
+      $dialog.remove();
+      document.body.classList.remove('modal-open');
+      // remove this last to prevent page jump
+      document.body.classList.remove('modal-close');
+    }, 1000);
   }
+
+  $closeBtn.addEventListener('click', closeDialog);
 
   // close on click outside the dialog
   $dialog.addEventListener('click', (e) => {
@@ -46,26 +77,19 @@ export async function createModal(fragment) {
     if (clientX < left || clientX > right || clientY < top || clientY > bottom) closeDialog();
   });
 
-  block.innerHTML = '';
-  block.append($dialog);
-
   return {
-    block,
     showModal: () => {
       $dialog.showModal();
-      // reset scroll position
-      setTimeout(() => { dialogContent.scrollTop = 0; }, 0);
       document.body.classList.add('modal-open');
     },
   };
 }
 
-export async function openModal(fragmentUrl) {
-  const path = fragmentUrl.startsWith('http')
-    ? new URL(fragmentUrl, window.location).pathname
-    : fragmentUrl;
+export async function openModal(modalPath) {
+  const path = modalPath.startsWith('http')
+    ? new URL(modalPath, window.location).pathname
+    : modalPath;
 
-  const fragment = await loadFragment(path);
-  const { showModal } = await createModal(fragment);
+  const { showModal } = await createModal(path);
   showModal();
 }
